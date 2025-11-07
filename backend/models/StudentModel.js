@@ -1,0 +1,38 @@
+import mongoose from "mongoose";
+
+import SectionSchema from "./SectionModel.js";
+import CertificateSchema from "./CertificateModel.js"
+
+const studentSchema = new mongoose.Schema(
+  {
+    firstName: {
+      type: String,
+      maxLength: [30, "El nombre no puede exceder los 30 caracteres"],
+      minLength: [3, "El nombre debe ser mínimo de 3 caracteres"],
+      required: true,
+    },
+    lastName: {
+      type: String,
+      maxLength: [30, "El nombre no puede exceder los 30 caracteres"],
+      minLength: [7, "Debe incluir los dos apellidos"],
+      required: true,
+    },
+    email: {
+      type: String,
+      minLength: [8, "La clave debe ser mínimo de 8 caracteres"],
+      match: [/.+\@.+\..+/, "Email inválido"],
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    sections: [SectionSchema],
+    certificate: CertificateSchema,
+  },{
+    timestamps: true,
+  }
+);
+
+export default mongoose.model("Student", studentSchema);
