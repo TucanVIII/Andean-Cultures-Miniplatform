@@ -5,7 +5,6 @@ import mongoose from "mongoose";
 import path from "path";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import corsOptions from "./config/corsOptions.js";
 
 // Routes imports
 import rootRouter from "./routes/root.js";
@@ -17,6 +16,7 @@ import questionsRoutes from "./routes/questionsRoutes.js";
 // Middlewares to handle logs and log errors
 import { logger, logEvents } from "./middleware/loggers.js";
 import errorHandler from "./middleware/errorHandler.js";
+import corsOptions from "./config/corsOptions.js";
 
 // Connection to DB
 import connectionDB from "./config/db.js";

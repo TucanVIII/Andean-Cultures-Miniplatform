@@ -1,0 +1,7 @@
+/* Main CSS file */
+
+/* Variables style */
+@import "./styles/variables.css";
+
+/* Base style */
+@import "./styles/normalize.css";
