@@ -1,16 +1,18 @@
 import asyncHandler from "express-async-handler";
-import Student from "../models/StudentModel.js";
+import User from "../models/UserModel.js";
 
 // @desc PATCH section progress
-// @route PATCH /students/progress/:sectionId
+// @route PATCH /users/progress/:sectionId
 // @access Private
 const updateSectionProgress = asyncHandler(async (req, res) => {
-  const { sectionId } = req.params;
-  const { isTheory, isVideo, studentId } = req.body;
-  if (!sectionId || !studentId) {
+  
+  const userId = req.userId;
+  const { sectionId } = req.params.sectionId;
+  const { isTheory, isVideo } = req.body;
+  if (!sectionId || !userId) {
     return res
       .status(404)
-      .json({ message: "Section Id and student Id are required" });
+      .json({ message: "Section Id and user Id are required" });
   }
 
   let updateFields = {};
@@ -23,18 +25,17 @@ const updateSectionProgress = asyncHandler(async (req, res) => {
     updateFields["sections.$.progress"] = "inProgress";
   }
 
-  const updatedStudent = await Student.findOneAndUpdate(
-    { _id: studentId, "sections.sectionId": sectionId },
+  const updatedUser = await User.findOneAndUpdate(
+    { _id: userId, "sections.sectionId": sectionId },
     { $set: updateFields },
     { new: true }
-  )
-    .select("-password")
-    .exec();
-  if (!updatedStudent) {
-    return res.status(404).json({ message: "Student not found" });
+  ).select("-password")
+   .exec();
+  if (!updatedUser) {
+    return res.status(404).json({ message: "User not found" });
   }
 
-  res.json({ message: "Updated progress", sections: updatedStudent.sections });
+  res.json({ message: "Updated progress", sections: updatedUser.sections });
 });
 
 export { updateSectionProgress };

@@ -1,4 +1,4 @@
-import Student from "../models/StudentModel.js";
+import User from "../models/UserModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import asyncHandler from "express-async-handler";
@@ -14,19 +14,19 @@ const login = asyncHandler(async (req, res) => {
       .json({ message: "Email and password are obligatory" });
   }
 
-  const fountStudent = await Student.findOne({ email }).exec();
-  if (!fountStudent) {
+  const foundUser = await User.findOne({ email }).exec();
+  if (!foundUser) {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
-  const match = await bcrypt.compare(password, fountStudent.password);
+  const match = await bcrypt.compare(password, foundUser.password);
   if (!match) {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
   const accessToken = jwt.sign(
     {
-      UserInfo: { email: fountStudent.email },
+      UserInfo: { email: foundUser.email },
     },
     process.env.ACCESS_TOKEN_SECRET,
     { expiresIn: "15m" }
@@ -70,7 +70,7 @@ const refresh = (req, res) => {
 
       const accessToken = jwt.sign(
         {
-          UserInfo: { email: fountStudent.email },
+          UserInfo: { email: foundUser.email },
         },
         process.env.ACCESS_TOKEN_SECRET,
         { expiresIn: "15m" }

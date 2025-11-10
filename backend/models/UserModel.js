@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import SectionSchema from "./SectionModel.js";
 import CertificateSchema from "./CertificateModel.js"
 
-const studentSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
@@ -24,6 +24,12 @@ const studentSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    role: {
+      type: [String],
+      enum: ["Student","Admin"],
+      default: "Student",
+      required:true
+    },
     password: {
       type: String,
       required: true,
@@ -35,4 +41,4 @@ const studentSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("Student", studentSchema);
+export default mongoose.model("User", userSchema);

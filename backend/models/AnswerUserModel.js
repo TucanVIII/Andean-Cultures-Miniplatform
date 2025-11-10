@@ -1,18 +1,18 @@
 import mongoose from "mongoose";
 
-const AnswerStudentSchema = new mongoose.Schema({
+const AnswerUserSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: "Student",
+    ref: "User",
   },
   questionId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "Question",
   },
-  studentAnswer: {
-    type: [String],
+  userAnswer: {
+    type: String,
     required: true,
   },
   score: {
@@ -21,4 +21,4 @@ const AnswerStudentSchema = new mongoose.Schema({
   },
 });
 
-export default AnswerStudentSchema;
+export default AnswerUserSchema;

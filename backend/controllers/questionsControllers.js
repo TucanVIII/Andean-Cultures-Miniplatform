@@ -73,7 +73,7 @@ const deleteQuestion = asyncHandler(async(req,res) => {
     res.json({ message:`Question with Id: ${deletedId} was deleted`});
 });
 
-// @desc GET question to the student interface
+// @desc GET question to the user interface
 // @route GET /quiz/:sectionId
 // @access Private
 const getQuizQuestion = asyncHandler(async(req,res) => {

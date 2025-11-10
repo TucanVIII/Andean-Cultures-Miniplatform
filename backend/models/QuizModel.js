@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import AnswerStudentSchema from "./AnswerStudentModel.js"
+import AnswerUserSchema from "./AnswerUserModel.js"
 
 const QuizSchema = new mongoose.Schema(
   {
@@ -21,7 +21,7 @@ const QuizSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
-    studentAnswers: [AnswerStudentSchema],
+    userAnswers: [AnswerUserSchema],
   },
   { _id: false }
 );

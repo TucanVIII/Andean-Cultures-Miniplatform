@@ -5,17 +5,20 @@ import mongoose from "mongoose";
 import path from "path";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import corsOptions from "./config/corsOptions.js";
 
 // Routes imports
 import rootRouter from "./routes/root.js";
-import studentRoutes from "./routes/studentRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 import sectionRoutes from "./routes/sectionRoutes.js";
 import quizAnswersRoutes from "./routes/quizAnswersRoutes.js";
 import questionsRoutes from "./routes/questionsRoutes.js";
 
+// Middlewares to handle logs and log errors
 import { logger, logEvents } from "./middleware/loggers.js";
 import errorHandler from "./middleware/errorHandler.js";
 
+// Connection to DB
 import connectionDB from "./config/db.js";
 
 // Path log events
@@ -33,16 +36,17 @@ const app = express();
 
 // Middlewares
 app.use(logger);
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
+app.use(cookieParser());
 
 app.use("/", express.static(path.join(__dirname, "public")));
 
 // Routes management
 app.use("/", rootRouter);
-app.use("/students", studentRoutes);
-app.use("/students/progress", sectionRoutes);
-app.use("/students/quiz", quizAnswersRoutes);
+app.use("/users", userRoutes);
+app.use("/users/progress", sectionRoutes);
+app.use("/users/quiz", quizAnswersRoutes);
 app.use("/questions",questionsRoutes);
 app.use(/.*/, (req, res) => {
   res.status(404);
