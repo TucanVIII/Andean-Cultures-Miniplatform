@@ -3,5 +3,10 @@
 /* Variables style */
 @import "./styles/variables.css";
 
-/* Base style */
+/* General style */
+@import "./styles//general.css";
+/* Normalize css */
 @import "./styles/normalize.css";
+
+/* Footer css*/
+@import "./styles/footer.css"
