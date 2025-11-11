@@ -1,5 +1,50 @@
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: var(--color-background);
+  min-height: 100vh;
+}
+
+/* TEXT SIZE */
+h1,
+h2,
+h3,
+p,
+a {
+  margin: 0;
+  padding: 0;
+  word-break: break-word;
+}
+
+h1 {
+  font-size: clamp(1.6rem, 3vw, 2.5rem); /* 32px → 48px */
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: clamp(1.4rem, 2vw, 2rem); /* 28px → 40px */
+  font-weight: 600;
+}
+
+h3 {
+  font-size: clamp(1.15rem, 1.5vw, 1.5rem); /* 24px → 32px */
+  font-weight: 500;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+a {
+  font-size: 1rem;
+  text-decoration: none;
 }

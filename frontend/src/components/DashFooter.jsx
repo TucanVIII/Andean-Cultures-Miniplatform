@@ -8,7 +8,7 @@ const DashFooter = () => {
 
         <div className="collaborators-footer">
           <div>
-            <h3 className="subtitle">En asociación con:</h3>
+            <h3 className="sub-subtitle__footer">En asociación con:</h3>
           </div>
           <div className="icons-container">
             UEMOL
@@ -17,7 +17,7 @@ const DashFooter = () => {
 
         <div className="social-media__container">
           <div>
-            <h3 className="subtitle">Redes sociales</h3>
+            <h3 className="sub-subtitle__footer">Redes sociales</h3>
           </div>
           <div className="icons-container">
             <a
@@ -53,7 +53,7 @@ const DashFooter = () => {
           <h1>YACHAY</h1>
         </div>
         <div className="footer-text">
-          <p>© {currentYear} YACHAY</p>
+          <p className="rights">© {currentYear} YACHAY</p>
         </div>
       </section>
 

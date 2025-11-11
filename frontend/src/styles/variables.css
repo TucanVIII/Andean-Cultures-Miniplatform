@@ -1,14 +1,43 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
+
+  /* PRIMARY PALETTE */
+  --color-primary-950: #0f2d3d;
+  --color-primary-900: #1f465a;
+  --color-primary-800: #20536a;
+  --color-primary-700: #1d6581;
+  --color-primary-600: #1c7d9e;
+  --color-primary-500: #1e9bbc;
+  --color-primary-400: #39b8d7;
+  --color-primary-300: #78d4e8;
+  --color-primary-200: #a9e5f1;
+  --color-primary-100: #d4f4f9;
+  --color-primary--50: #eefbfd;
+
+  /* TEXT COLOR*/
+  /* h1 */--color-text-I: #111111;
+  /* h2 */--color-text-II: #242424;
+  /* h3 */--color-text-III: #414141;
+  /* p */--color-text-IV: #5f5f5f;
+  /* a */--color-text-V: #f3f2f2;
+
+  /* BACKGROUNDS COLORS */
+  --color-background: #f3f2f2;
+  --color-footer: #3a3737;
+
+  /* COLORES DE ESTADO (Feedback) */
+  --color-success: #4caf50;
+  --color-warning: #ffc107;
+  --color-error: #f44336;
+  --color-info: #03a9f4;
+
+  /* FONT AND STYLE */
+  font-size: clamp(20px, 1.2vw, 18px);
   font-family: "Jost", sans-serif;
-  line-height: 1.5;
   font-weight: 400;
-
+  line-height: 1.5;
   color-scheme: light dark;
-  color: rgba(14, 13, 13, 0.87);
-  background-color: #f3f2f2;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

@@ -8,5 +8,8 @@
 /* Normalize css */
 @import "./styles/normalize.css";
 
+/* Section css*/
+@import "./styles/dashSection.css";
+
 /* Footer css*/
-@import "./styles/footer.css"
+@import "./styles/footer.css";

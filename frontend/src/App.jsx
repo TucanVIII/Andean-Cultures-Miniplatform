@@ -1,7 +1,5 @@
 import { Routes,Route } from "react-router-dom";
 
-import "./index.css"
-
 import Layout from "./components/Layout.jsx";
 import Public from "./components/Public.jsx";
 import Login from "./components/Login.jsx";
