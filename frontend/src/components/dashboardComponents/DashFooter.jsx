@@ -1,4 +1,5 @@
 import { FaFacebook, FaYoutube, FaInstagram } from "react-icons/fa";
+import appLogo from "../../assets/appLogo.png";
 
 const DashFooter = () => {
   const currentYear = new Date().getFullYear();
@@ -25,21 +26,21 @@ const DashFooter = () => {
               target="_blank"
               className="dash-footer__button icon-button faFacebook"
             >
-              <FaFacebook icon={FaFacebook} />
+              <FaFacebook/>
             </a>
             <a
               href="https://www.instagram.com/explore/locations/1016636274/unidad-educativa-municipal-oswaldo-lombeida/"
               target="_blank"
               className="dash-footer__button icon-button faInstagram"
             >
-              <FaInstagram icon={FaInstagram} />
+              <FaInstagram/>
             </a>
             <a
               href="https://www.youtube.com/@unidadeducativamunicipalos5089/featured"
               target="_blank"
               className="dash-footer__button icon-button faYoutube"
             >
-              <FaYoutube icon={FaYoutube} />
+              <FaYoutube/>
             </a>
           </div>
         </div>
@@ -50,6 +51,7 @@ const DashFooter = () => {
 
       <section className="terms-footer">
         <div className="app-logo">
+          <img src={appLogo} alt="Logo de YACHAY" className="app-logo-img"/>
           <h1>YACHAY</h1>
         </div>
         <div className="footer-text">

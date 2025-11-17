@@ -1,3 +1,4 @@
+/* Footer */
 .dash-footer {
   width: 100%;
   color: var(--color-text-V);
@@ -8,32 +9,35 @@
   align-items: center;
 }
 
-.terms-grid{
+/* Section main container */
+.terms-grid {
   display: flex;
   justify-content: space-around;
   width: 90%;
   margin: 0 auto;
 }
 
-.collaborators-footer{
-    padding: 15px;
+/* Div collaborators */
+.collaborators-footer {
+  padding: 15px;
 }
 
-.social-media__container{
-    padding: 15px;
+/* Div social media container */
+.social-media__container {
+  padding: 15px;
 }
 
-.footer-line{
-    width: 90%;
+.footer-line {
+  width: 90%;
 }
 
-.terms-footer{
-    display: flex;
-    flex-direction: column;
+.footer-line {
+  background-color: var(--color-text-V);
+  height: 1px;
 }
 
-.footer-text{
-    padding: 15px;
+.footer-text {
+  padding: 15px;
 }
 
 .dash-footer a {
@@ -42,12 +46,11 @@
 }
 
 .icon-button {
-  width: 50px;
-  height: 50px;
-  font-size: 2.2rem;
+  font-size: 2rem;
   transition: transform 0.3s ease, color 0.3s ease;
   display: inline-flex;
   align-items: center;
+  margin: 5px 10px 0px 10px;
 }
 
 .faFacebook {
@@ -68,31 +71,44 @@
   }
 }
 
-.sub-subtitle__footer{
+.sub-subtitle__footer {
   color: var(--color-text-V);
 }
 
-.footer-line{
-    background-color: var(--color-text-V);
-    height: 1px;
+/* Section of terms and conditions*/
+.terms-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.rights{
+.app-logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.app-logo-img {
+  width: 60px;
+  height: 60px;
+}
+
+.rights {
   color: var(--color-text-V);
 }
 
 /* RESPONSIVE DESIGN */
 @media (max-width: 600px) {
-    .terms-grid {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    .collaborators-footer,
-    .social-media__container {
-        flex: 1 1 100%;
-    }
-    .icons-container {
-        justify-content: center;
-    }
+  .terms-grid {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .collaborators-footer,
+  .social-media__container {
+    flex: 1 1 100%;
+  }
+  .icons-container {
+    justify-content: center;
+  }
 }

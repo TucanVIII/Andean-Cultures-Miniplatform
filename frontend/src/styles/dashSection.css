@@ -102,20 +102,16 @@
 /* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
   .card-study{
-    flex-direction: column;
+    flex-direction: column-reverse;
     text-align: center;
     margin: 5px;
     padding: 5px;
   }
 
-  .card-study:nth-child(even){
-    flex-direction: row-reverse;
+  .card-study:nth-child(odd){
+    flex-direction: column;
   }
 
-  .card-study:nth-child(even) .card-description{
-    align-items: flex-end;
-    text-align: right;
-}
 
   .img-study {
     margin: 5px;

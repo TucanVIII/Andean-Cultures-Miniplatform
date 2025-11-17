@@ -47,4 +47,135 @@ p {
 a {
   font-size: 1rem;
   text-decoration: none;
+  cursor: pointer;
+}
+
+
+/* Buttons style */
+.login-button,
+.login-button *,
+.login-button :after,
+.login-button :before,
+.login-button:after,
+.login-button:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+
+.login-button {
+  -webkit-tap-highlight-color: transparent;
+  background-color: #000;
+  background-image: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 100%;
+  font-weight: 900;
+  line-height: 1.5;
+  margin: 0;
+  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+  padding: 0;
+}
+
+.login-button:disabled {
+  cursor: default;
+}
+
+.login-button:-moz-focusring {
+  outline: auto;
+}
+
+.login-button svg {
+  display: block;
+  vertical-align: middle;
+}
+
+.login-button [hidden] {
+  display: none;
+}
+
+.login-button {
+  padding: 0.75rem 1.25rem;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.login-button:before {
+  --progress: 100%;
+  background: #fff;
+  -webkit-clip-path: polygon(
+    100% 0,
+    var(--progress) var(--progress),
+    0 100%,
+    100% 100%
+  );
+  clip-path: polygon(
+    100% 0,
+    var(--progress) var(--progress),
+    0 100%,
+    100% 100%
+  );
+  content: "";
+  inset: 0;
+  position: absolute;
+  transition: -webkit-clip-path 0.2s ease;
+  transition: clip-path 0.2s ease;
+  transition: clip-path 0.2s ease, -webkit-clip-path 0.2s ease;
+}
+
+.login-button:hover:before {
+  --progress: 0%;
+}
+
+.login-button .text-container {
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+
+.login-button .text {
+  display: block;
+  font-weight: 900;
+  mix-blend-mode: difference;
+  position: relative;
+}
+
+.login-button:hover .text {
+  -webkit-animation: move-up-alternate 0.3s ease forwards;
+  animation: move-up-alternate 0.3s ease forwards;
+}
+
+@-webkit-keyframes move-up-alternate {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(80%);
+  }
+
+  51% {
+    transform: translateY(-80%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes move-up-alternate {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(80%);
+  }
+
+  51% {
+    transform: translateY(-80%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
 }

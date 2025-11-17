@@ -1,8 +1,8 @@
-import reactLogo from "../assets/react.svg";
+import reactLogo from "../../assets/react.svg";
 
 const DashSection = () => {
   const content = (
-    <section className="section-learning__container">
+    <section className="section-learning__container" id="infoSection">
 
       <div className="learn-container">
         <h2 className="sub-title">Desarrollando aprendizajes interactivos</h2>
@@ -11,7 +11,7 @@ const DashSection = () => {
             <img src={reactLogo} alt="" className="img-type" />
             <h3 className="sub-subtitle">MOTIVADOR</h3>
             <p className="description">
-              Capta <b>el interés por aprender</b>
+              Capta <b>el interés</b> por aprender
             </p>
           </div>
           <div className="learn-type">

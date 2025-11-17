@@ -1,0 +1,33 @@
+.learn-more__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.learn-more-text {
+  position: absolute;
+  z-index: 1000;
+  margin-bottom: 85px;
+}
+
+.learn-more-text h3{
+  color: var(--color-text-V);
+}
+
+.learn-more-button {
+  position: absolute;
+  z-index: 1000;
+}
+
+.dropdown-circle {
+  display: inline-block;
+  font-size: 55px;
+  color: var(--color-primary-900);
+  transition: color 0.3s;
+  &:hover {
+    color: var(--color-primary-700);
+  }
+}
