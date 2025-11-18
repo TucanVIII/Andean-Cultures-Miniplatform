@@ -1,0 +1,38 @@
+.dark-mode {
+  background-color: var(--color-primary-100);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-radius: 180px;
+  overflow: hidden;
+  cursor: pointer;
+  height: 35px;
+  transition: background-color 3s ease-in-out;
+}
+
+.dark-mode input {
+  display: none;
+}
+
+.icon {
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  color: var(--color-primary-900);
+
+  &.active {
+    background: #072537;
+    border: 3px solid var(--color-primary-100);
+  }
+}
+
+.sun.active {
+  color: #dbff00;
+}
+
+.moon.active {
+  color: #ffffff;
+}
+

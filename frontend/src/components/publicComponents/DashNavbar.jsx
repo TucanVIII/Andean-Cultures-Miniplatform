@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { GoSun } from "react-icons/go";
-import { FaMoon } from "react-icons/fa6";
+import DarkModeSwitch from "../../features/DarkModeSwitch";
 
 import appLogo from "../../assets/appLogo.png";
 
@@ -14,7 +13,7 @@ const DashNavbar = () => {
   };
 
   const handleMenuClick = () => {
-    navigate("/login");
+    navigate("/menu");
   };
 
   const handleScroll = (e) => {
@@ -43,7 +42,8 @@ const DashNavbar = () => {
           <a onClick={handleMenuClick}>
             Soporte
           </a>
-          <input type="checkbox" name="darkMode" id="darkMode" className="darkMode"/>
+          <DarkModeSwitch />
+
         </div>
 
         <button className="login-button" onClick={handleLoginClick}>

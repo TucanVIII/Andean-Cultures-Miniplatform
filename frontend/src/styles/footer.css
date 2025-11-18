@@ -7,6 +7,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  .dark &{
+    background: var(--color-footer-dark);
+  }
 }
 
 /* Section main container */
@@ -32,7 +35,7 @@
 }
 
 .footer-line {
-  background-color: var(--color-text-V);
+  background-color: var(--color-text-VII);
   height: 1px;
 }
 

@@ -12,11 +12,17 @@
   text-align: center;
   background: var(--color-primary-100);
   padding: 30px 10px;
+  .dark &{
+      background: var(--color-primary-950);
+    }
 }
 
 .learn-container h2 {
     margin: 10px;
     padding: 10px;
+    .dark &{
+      color: var(--color-text-VII);
+    }
   }
 
 .learning-types {
@@ -28,6 +34,9 @@
 
 .sub-title {
   color: var(--color-text-I);
+  .dark &{
+      color: var(--color-text-VI);
+    }
 }
 
 .sub-subtitle {
@@ -36,6 +45,9 @@
 
 .description {
   color: var(--color-text-III);
+  .dark &{
+      color: var(--color-text-V);
+    }
 }
 
 .learn-type {
@@ -58,6 +70,9 @@
     text-align: center;
     margin: 10px;
     padding: 10px;
+    .dark &{
+      color: var(--color-text-VI);
+    }
   }
 }
 
@@ -66,6 +81,9 @@
   text-align: center;
   margin: 10px;
   padding: 10px;
+  .dark &{
+      color: var(--color-text-V);
+    }
 }
 
 .card-study{
@@ -93,10 +111,16 @@
 
 .sub-subtitle{
     color: var(--color-text-III);
+    .dark &{
+      color: var(--color-text-V);
+    }
 }
 
 .card-study__description{
     color: var(--color-text-IV);
+    .dark &{
+      color: var(--color-text-VV);
+    }
 }
 
 /* RESPONSIVE DESIGN */

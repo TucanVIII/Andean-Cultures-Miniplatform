@@ -25,9 +25,9 @@
 .dropdown-circle {
   display: inline-block;
   font-size: 55px;
-  color: var(--color-primary-900);
+  color: var(--color-primary-400);
   transition: color 0.3s;
   &:hover {
-    color: var(--color-primary-700);
+    color: var(--color-primary-600);
   }
 }

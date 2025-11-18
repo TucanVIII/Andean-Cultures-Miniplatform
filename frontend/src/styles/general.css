@@ -12,6 +12,10 @@ body {
   min-height: 100vh;
 }
 
+body.dark{
+  background-color: var(--color-background-dark);
+}
+
 /* TEXT SIZE */
 h1,
 h2,

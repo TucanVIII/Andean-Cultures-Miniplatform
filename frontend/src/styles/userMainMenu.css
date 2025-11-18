@@ -1,0 +1,85 @@
+.menu-body__container{
+    width: 100%;
+    height: 100vh;
+    background-image: url("../assets/tempmap.png");
+    background-size: cover;
+    background-position: center;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding-left: 20px;
+}
+
+.title-menu__container{
+    grid-row: 1;
+}
+
+.title-menu {
+    color: var(--color-text-I);
+}
+
+.start-button__container{
+    grid-row: 2;
+}
+
+.faq-container{
+    grid-row: 3;
+}
+
+.faq-container h3{
+    color: var(--color-text-II);
+}
+
+.buttons-container{
+    display: flex;
+    gap: 20px;
+}
+
+/* Start button */ 
+.start-button,
+.faq-button,
+.support-button {
+ appearance: none;
+ background-color: transparent;
+ border: 2px solid var(--color-text-I);
+ border-radius: 5px;
+ box-sizing: border-box;
+ color: var(--color-text-I);
+ cursor: pointer;
+ display: inline-block;
+ font-weight: 800;
+ line-height: normal;
+ margin: 0;
+ min-height: 5px;
+ min-width: 0;
+ outline: none;
+ padding: 0.5em 1.5em;
+ text-align: center;
+ text-decoration: none;
+ transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+ user-select: none;
+ -webkit-user-select: none;
+ touch-action: manipulation;
+ will-change: transform;
+}
+
+.start-button:disabled, 
+.faq-button:disabled,
+.support-button:disabled {
+ pointer-events: none;
+}
+
+.start-button:hover, 
+.faq-button:hover,
+.support-button:hover {
+ color: var(--color-text-VII);
+ background-color: var(--color-text-II);
+ box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+ transform: translateY(-2px);
+}
+
+.start-button:active,
+.faq-button:active,
+.support-button:active {
+ box-shadow: none;
+ transform: translateY(0);
+}
