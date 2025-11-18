@@ -1,15 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+import "../../styles/dashHero.css";
 
 import backgroundImage from "../../assets/CulturaInca.jpg";
 
 const DashHero = () => {
-
-  const navigate = useNavigate();
-  
-  const handleLoginClick = () => {
-    navigate("/login");
-  }
-
   const content = (
     <div className="hero-container">
       <div className="pfp-img">
@@ -20,15 +15,15 @@ const DashHero = () => {
         <p className="hero-description">
           Inspirando una nueva forma de aprender y descubrir la historia
         </p>
-        <button className="login-button" onClick={handleLoginClick}>
-          <span className="text-container">
-            <span className="text">Login</span>
-          </span>
-        </button>
+        <Link to="login">
+          <div className="button-borders">
+            <button className="primary-button">LOGIN</button>
+          </div>
+        </Link>
       </div>
     </div>
   );
-  return content; 
+  return content;
 };
 
 export default DashHero;

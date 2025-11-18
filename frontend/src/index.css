@@ -10,12 +10,6 @@
 /* Normalize css */
 @import "./styles/normalize.css";
 
-/* Navbar css */
-@import "./styles/dashNavbar.css";
-
-/* Hero css */
-@import "./styles/dashHero.css";
-
 /* More button */
 @import "./styles/moreButton.css";
 

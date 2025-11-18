@@ -1,5 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import DarkModeSwitch from "../../features/DarkModeSwitch";
+
+import "../../styles/dashNavbar.css";
 
 import appLogo from "../../assets/appLogo.png";
 
@@ -7,10 +9,6 @@ const DashNavbar = () => {
   const target_section = "infoSection";
 
   const navigate = useNavigate();
-
-  const handleLoginClick = () => {
-    navigate("/login");
-  };
 
   const handleMenuClick = () => {
     navigate("/menu");
@@ -39,18 +37,15 @@ const DashNavbar = () => {
           <a href={`#${target_section}`} onClick={handleScroll}>
             Saber más
           </a>
-          <a onClick={handleMenuClick}>
-            Soporte
-          </a>
+          <a onClick={handleMenuClick}>Soporte</a>
           <DarkModeSwitch />
-
         </div>
 
-        <button className="login-button" onClick={handleLoginClick}>
-          <span className="text-container">
-            <span className="text">Login</span>
-          </span>
-        </button>
+        <Link to="login">
+          <div class="button-borders">
+            <button class="primary-button">LOGIN</button>
+          </div>
+        </Link>
       </div>
     </nav>
   );

@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { BiSolidExit } from "react-icons/bi";
 import { FaUser,FaPlayCircle,FaHome } from "react-icons/fa";
 import DarkModeSwitch from "../../features/DarkModeSwitch";
@@ -7,55 +7,37 @@ import "../../styles/userNav.css"
 import appLogo from "../../assets/appLogo.png";
 
 const UserNav = () => {
-  const target_section = "infoSection";
-
-  const navigate = useNavigate();
-
-  const handleLoginClick = () => {
-    navigate("/login");
-  };
-
-  const handleMenuClick = () => {
-    navigate("/menu");
-  };
-
-  const handleScroll = (e) => {
-    e.preventDefault();
-    const targetElement = document.getElementById(target_section);
-    if (targetElement) {
-      targetElement.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  };
 
   const content = (
     <nav className="navbar-container">
-      <a href="#" className="appLogo">
+      <Link to="/menu" className="appLogo">
         <img src={appLogo} alt="Logo de YACHAY" className="app-logo-img" />
         <h1 className="title">YACHAY</h1>
-      </a>
+      </Link>
 
       <div className="nav-links__container">
         <div className="nav-links">
-          <a href={`#${target_section}`} onClick={handleScroll}>
+
+          <Link to="/menu">
             Inicio <FaHome />
-          </a>
-          <a href={`#${target_section}`} onClick={handleScroll}>
+          </Link>
+
+          <Link to="sections">
             Secciones <FaPlayCircle />
-          </a>
-          <a onClick={handleMenuClick}>
+          </Link>
+          
+          <Link to="profile">
             Perfil <FaUser />
-          </a>
+          </Link>
 
           <DarkModeSwitch />
 
         </div>
 
-        <button onClick={handleLoginClick}>
+        <button>
           <BiSolidExit />;
         </button>
+
       </div>
     </nav>
   );
@@ -63,4 +45,4 @@ const UserNav = () => {
   return content;
 };
 
-export default UserNav
+export default UserNav;
