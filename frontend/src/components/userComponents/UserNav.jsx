@@ -13,6 +13,7 @@ const UserNav = () => {
       <Link to="/menu" className="appLogo">
         <img src={appLogo} alt="Logo de YACHAY" className="app-logo-img" />
         <h1 className="title">YACHAY</h1>
+        <h2>Usuario: USER</h2>
       </Link>
 
       <div className="nav-links__container">
@@ -34,8 +35,8 @@ const UserNav = () => {
 
         </div>
 
-        <button>
-          <BiSolidExit />;
+        <button className='logout-button'>
+          <BiSolidExit className='logout-icon'/>
         </button>
 
       </div>
