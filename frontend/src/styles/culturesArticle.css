@@ -1,0 +1,140 @@
+/* main-culture__container */
+.main-culture__container {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+}
+
+.title-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* background__container */
+.background__container {
+  margin-bottom: 30px;
+}
+
+.background__description {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* geographical-location__container */
+.geographical-location__subcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.geographical-location__description {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.geographical-location__img {
+  width: 90px;
+}
+
+/* history__container */
+.history__container {
+  margin-bottom: 30px;
+}
+
+.history-description {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.ul-culture__list li {
+  list-style: none;
+  margin-bottom: 5px;
+  padding-left: 25px;
+}
+
+/* organization__container */
+.organization__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.social-organization__container {
+  margin-bottom: 10px;
+}
+.social-organization__description {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.economic-organization__container {
+  margin-bottom: 10px;
+}
+.economic-organization__description {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.politic-organization__container {
+  margin-bottom: 10px;
+}
+.politic-organization__description {
+  text-align: justify;
+  text-justify: inter-word;
+}
+.organization__img {
+  width: 90px;
+}
+
+/* cultural-achievements__container */
+.cultural-achievements__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.cultural-achievements__description {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.cultural-achievements__img {
+  width: 90px;
+}
+
+/* beliefs__container */
+.beliefs__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.beliefs__description {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.beliefs__img {
+  width: 90px;
+}
+
+/* art__container */
+.art__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.art__description {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.art__img {
+  width: 90px;
+}

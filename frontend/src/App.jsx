@@ -2,11 +2,12 @@ import { Routes,Route } from "react-router-dom";
 
 import Layout from "./components/Layout.jsx";
 import Public from "./components/Public.jsx";
-import Login from "./components/Login.jsx";
+import Login from "./features/auth/Login.jsx";
 import UserMainMenu from "./components/UserMainMenu.jsx";
 import MainMenuContent from "./components/mainMenuComponents/MainMenuContent.jsx";
 import SectionsLayout from"./components/mainMenuComponents/SectionsLayout.jsx";
 import ProfileUser from "./components/mainMenuComponents/ProfileUser.jsx";
+import AdministratorSection from "./components/mainMenuComponents/AdministratorSection.jsx";
 
 function App() {
   return(
@@ -20,6 +21,7 @@ function App() {
           <Route index element={<MainMenuContent />} />
           <Route path="sections" element={<SectionsLayout />} />
           <Route path="profile" element={<ProfileUser />} />
+          <Route path="administrator" element={<AdministratorSection />} />
         </Route>{/* End protected routes */}
       </Route>
     </Routes>

@@ -10,29 +10,17 @@ const initialState = questionsAdapter.getInitialState();
 export const questionsApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         getQuestions: builder.query({
-            query: () => ({
-                url: "/questions",
-                validateStatus: (response,result) => {
-                    return response.status === 200 & !result.isError
-                },
-            }),
-            transformResponse: responseData => {
-                const loadedQuestions = responseData.map(question => {
-                    question.id = question._id
-                    return question
-                })
-                return questionsAdapter.setAll(initialState,loadedQuestions)
+            query: (filter = {}) => {
+                const queryParams = new URLSearchParams(filter).toString();
+                return `/questions${queryParams ? `?${queryParams}` : ''}`;
             },
-            providesTags: (result,error,arg) => {
-                if(result?.ids){
-                    return [
-                        { type:"Questions", id:""},
-                        ...result.ids.map(id => ({
-                            type:"Questions",id
-                        }))
-                    ]
-                } else return [{ type:"Questions", id:""}]
-            }
+            transformResponse: responseData => {
+                return questionsAdapter.setAll(initialState, responseData);
+            },
+            providesTags: (result,error,arg) => [
+                {type: "Question", id: "LIST"},
+                ...(result?.ids || []).map((id) => ({type:"Question",id})) 
+            ]
         }),
         addNewQuestion: builder.mutation({
             query: initialQuestionData => ({
@@ -42,7 +30,7 @@ export const questionsApiSlice = apiSlice.injectEndpoints({
                     ...initialQuestionData
                 }
             }),
-            invalidatesTags: [{ type:"Question", id:"" }]
+            invalidatesTags: [{ type:"Question", id:"LIST" }]
         }),
         updateQuestion: builder.mutation({
             query: initialQuestionData => ({
@@ -50,17 +38,22 @@ export const questionsApiSlice = apiSlice.injectEndpoints({
                 method: "PATCH",
                 body: { ...initialQuestionData}
             }),
-            invalidatesTags: (result,error,arg) => [{ type:"Question", id:arg.id}]
+            invalidatesTags: (result,error,arg) => [
+                { type:"Question", id:arg.id},
+                { type: "Question", id: "LIST" }
+            ]
         }),
         deleteQuestion: builder.mutation({
             query: ({id}) => ({
                 url:"/questions",
                 method: "DELETE",
                 body: {id}
-            })
+            }),
+            invalidatesTags: (result,error,arg) => [{type:"Question",id:arg.id}]
         }),
         getQuizQuestion: builder.query({
-
+            query: (sectionId) => `questions/quiz/${sectionId}`,
+            providesTags: (result,error,sectionId) => [{type:"QuizQuestions", id:sectionId}]
         })
     })
 })

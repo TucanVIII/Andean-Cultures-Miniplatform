@@ -20,6 +20,12 @@
   align-items: center;
 }
 
+.appLogo h1{
+  line-height: 60px;
+  margin: 0;
+  padding: 0;
+};
+
 .appLogo img {
   width: 55px;
   height: 55px;

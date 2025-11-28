@@ -8,9 +8,10 @@ export const quizApiSlice = apiSlice.injectEndpoints({
                 method: "POST",
                 body: { userId,answers }
             }),
-            invalidatesTags: (result,error,arg) => [{
-                type:"Section", id:arg.sectionId
-            }]
+            invalidatesTags: (result,error,sectionId) => [
+                {type:"Section", id: sectionId},
+                {type:"User", id:"CURRENT_USER"}
+            ]
         })
     })
 })

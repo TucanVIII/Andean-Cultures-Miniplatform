@@ -1,55 +1,67 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import AccordionSections from "../../features/sections/AccordionSections";
 
-import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
+import CulturaCaral from "../sectionsComponents/CulturaCaral.jsx";
+import CulturaWari from "../sectionsComponents/CulturaWari.jsx";
+import CulturaTiawanaku from "../sectionsComponents/CulturaTiawanaku.jsx";
+import CulturaInca from "../sectionsComponents/CulturaInca.jsx";
 
 import "../../styles/sectionsLayout.css";
 
+const cultureComponents = {
+  CARAL: CulturaCaral,
+  WARI: CulturaWari,
+  TIAWANAKU: CulturaTiawanaku,
+  INCA: CulturaInca,
+};
+
 const SectionsLayout = () => {
-  const [isActive, setIsActive] = useState(null);
-  const accordionData = [
-    { title: "TITULO I", content: "CONTENIDO I" },
-    { title: "TITULO II", content: "CONTENIDO II" },
-    { title: "TITULO III", content: "CONTENIDO III" },
-    { title: "TITULO IV", content: "CONTENIDO IV" }
-  ];
+  const [selectedCulture, setSelectedCulture] = useState(null);
+  const [pendingSectionId, setPendingSectionId] = useState(null);
+
+  const handleSelectedCulture = (cultureTitle) => {
+    setSelectedCulture(cultureTitle);
+    setPendingSectionId(null);
+  };
+
+  const handleScrollToItemId = (itemId) => {
+    setPendingSectionId(itemId);
+  };
+
+  const handleScroll = (itemId) => {
+    const titleId = document.getElementById(itemId);
+    if (titleId) {
+      titleId.scrollIntoView();
+      setPendingSectionId(null);
+    }
+  };
+
+  useEffect(() => {
+    if (pendingSectionId) handleScroll(pendingSectionId);
+  }, [pendingSectionId, selectedCulture]);
+
+  const CultureComponent = cultureComponents[selectedCulture];
 
   const content = (
     <main className="main-container">
-
       <div className="accordion-container">
-
-        <AccordionSections />
-        {accordionData.map((item, index) => (
-          <div className="accordion" key={index}>
-            <div className="accordion-item">
-              <div
-                className="accordion-title"
-                onClick={() =>
-                  setIsActive(isActive === index ? null : index)
-                }
-              >
-                <h3>{item.title}</h3>
-                <div>
-                  {isActive === index ? <FaAngleUp /> : <FaAngleDown />}
-                </div>
-              </div>
-
-              {isActive === index && (
-                <div className="accordion-content">{item.content}</div>
-              )}
-            </div>
-          </div>
-        ))}
+        <AccordionSections
+          selectedCulture={selectedCulture}
+          onSelectedCulture={handleSelectedCulture}
+          onScrollSection={handleScrollToItemId}
+        />
       </div>
 
       <div className="article-container">
         <div className="culture-container">
-          <h2>AQUÍ VA LA CULTURA</h2>
+          {CultureComponent ? (
+            <CultureComponent />
+          ) : (
+            <h2>Seleccione una cultura del acordeón para comenzar</h2>
+          )}
         </div>
       </div>
-
     </main>
   );
   return content;
