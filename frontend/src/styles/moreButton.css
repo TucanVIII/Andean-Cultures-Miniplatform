@@ -9,7 +9,6 @@
 
 .learn-more-text {
   position: absolute;
-  z-index: 1000;
   margin-bottom: 85px;
 }
 
@@ -19,7 +18,6 @@
 
 .learn-more-button {
   position: absolute;
-  z-index: 1000;
 }
 
 .dropdown-circle {
