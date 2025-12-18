@@ -5,6 +5,21 @@
   margin: 30px;
 }
 
+.main-title__container {
+  color: var(--color-text-I);
+  .dark & {
+    color: var(--color-text-VII);
+  }
+}
+
+/* video__container */
+.video__container{
+  color: var(--color-text-I);
+  .dark & {
+    color: var(--color-text-VII);
+  }
+}
+
 .title-container {
   display: flex;
   justify-content: center;
@@ -15,9 +30,20 @@
   margin-bottom: 30px;
 }
 
+.background__title {
+  color: var(--color-text-II);
+  .dark & {
+    color: var(--color-text-VI);
+  }
+}
+
 .background__description {
   text-align: justify;
   text-justify: inter-word;
+  color: var(--color-text-II);
+  .dark & {
+    color: var(--color-text-VI);
+  }
 }
 
 /* geographical-location__container */
@@ -28,9 +54,20 @@
   gap: 10px;
 }
 
+.geographical-location__title {
+  color: var(--color-text-II);
+  .dark & {
+    color: var(--color-text-VI);
+  }
+}
+
 .geographical-location__description {
   text-align: justify;
   text-justify: inter-word;
+  color: var(--color-text-II);
+  .dark & {
+    color: var(--color-text-VI);
+  }
 }
 
 .geographical-location__img {
@@ -42,15 +79,34 @@
   margin-bottom: 30px;
 }
 
+.history-title {
+  color: var(--color-text-I);
+  .dark & {
+    color: var(--color-text-VII);
+  }
+}
+
 .history-description {
   text-align: justify;
   text-justify: inter-word;
+  color: var(--color-text-II);
+  .dark & {
+    color: var(--color-text-VI);
+  }
 }
 
 .ul-culture__list li {
   list-style: none;
   margin-bottom: 5px;
   padding-left: 25px;
+  color: var(--color-text-II);
+  .dark & {
+    color: var(--color-text-VI);
+  }
+}
+
+.chronology__img {
+  width: 100%;
 }
 
 /* organization__container */
@@ -61,28 +117,59 @@
   margin-bottom: 30px;
 }
 
+.organization__title {
+  color: var(--color-text-I);
+  .dark & {
+    color: var(--color-text-VII);
+  }
+}
+
 .social-organization__container {
   margin-bottom: 10px;
+  color: var(--color-text-I);
+  .dark & {
+    color: var(--color-text-VII);
+  }
 }
 .social-organization__description {
   text-align: justify;
   text-justify: inter-word;
+  color: var(--color-text-II);
+  .dark & {
+    color: var(--color-text-VI);
+  }
 }
 
 .economic-organization__container {
   margin-bottom: 10px;
+  color: var(--color-text-I);
+  .dark & {
+    color: var(--color-text-VII);
+  }
 }
 .economic-organization__description {
   text-align: justify;
   text-justify: inter-word;
+  color: var(--color-text-II);
+  .dark & {
+    color: var(--color-text-VI);
+  }
 }
 
 .politic-organization__container {
   margin-bottom: 10px;
+  color: var(--color-text-I);
+  .dark & {
+    color: var(--color-text-VII);
+  }
 }
 .politic-organization__description {
   text-align: justify;
   text-justify: inter-word;
+  color: var(--color-text-II);
+  .dark & {
+    color: var(--color-text-VI);
+  }
 }
 .organization__img {
   width: 90px;
@@ -94,11 +181,19 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 10px;
+  color: var(--color-text-I);
+  .dark & {
+    color: var(--color-text-VII);
+  }
 }
 
 .cultural-achievements__description {
   text-align: justify;
   text-justify: inter-word;
+  color: var(--color-text-II);
+  .dark & {
+    color: var(--color-text-VI);
+  }
 }
 
 .cultural-achievements__img {
@@ -111,11 +206,19 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 10px;
+  color: var(--color-text-I);
+  .dark & {
+    color: var(--color-text-VII);
+  }
 }
 
 .beliefs__description {
   text-align: justify;
   text-justify: inter-word;
+  color: var(--color-text-II);
+  .dark & {
+    color: var(--color-text-VI);
+  }
 }
 
 .beliefs__img {
@@ -128,13 +231,28 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 10px;
+  color: var(--color-text-I);
+  .dark & {
+    color: var(--color-text-VII);
+  }
 }
 
 .art__description {
   text-align: justify;
   text-justify: inter-word;
+  color: var(--color-text-II);
+  .dark & {
+    color: var(--color-text-VI);
+  }
 }
 
 .art__img {
   width: 90px;
+}
+
+/* questions-container */
+.questions-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

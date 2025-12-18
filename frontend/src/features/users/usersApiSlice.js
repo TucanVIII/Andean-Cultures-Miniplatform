@@ -25,13 +25,13 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             providesTags: (result, error, arg) => {
                 if(result?.ids){
                     return [
-                        { type:"User", id:""},
+                        { type:"User", id:"LIST"},
                         ...result.ids.map(id => ({
                             type:"User",
                             id,
                         }))
                     ]
-                } else return [{ type:"User", id:""}];
+                } else return [{ type:"User", id:"LIST"}];
             }
         }),
         addNewUser: builder.mutation({
@@ -42,7 +42,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                     ...initialUserData,
                 }
             }),
-            invalidatesTags: [{ type: "User", id:""}]
+            invalidatesTags: [{ type: "User", id:"LIST"}]
         }),
         updateUser: builder.mutation({
             query: initialUserData => ({
@@ -71,6 +71,10 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                     id: arg.id
                 }
             ]
+        }),
+        getUserById: builder.query({
+            query: (id) => `users/${id}`,
+            providesTags: (results,error,id) => [{type:"User",id}]
         })
     })
 })
@@ -80,6 +84,7 @@ export const {
   useAddNewUserMutation,
   useUpdateUserMutation,
   useDeleteUserMutation,
+  useGetUserByIdQuery
 } = usersApiSlice;
 
 export const selectUsersResult = usersApiSlice.endpoints.getUsers.select();

@@ -3,6 +3,7 @@ import CaralQuestions from "../../features/questions/CaralQuestions.jsx";
 import "../../styles/culturesArticle.css";
 
 import placeholderJPG from "../../assets/react.svg";
+import CronologiaWari from "../../assets/CronologiaWari.png";
 
 const CulturaCaral = () => {
   const content = (
@@ -12,7 +13,9 @@ const CulturaCaral = () => {
       </div>
 
       <div className="background__container">
-        <h2 className="background__title" id="antecedentes-wari">Antecedentes</h2>
+        <h2 className="background__title" id="antecedentes-wari">
+          Antecedentes
+        </h2>
         <p className="background__description">
           Los orígenes Wari pueden explicarse entonces por la interacción
           diversa y recíproca de tres áreas de mucho prestigio y de desarrollo
@@ -23,7 +26,9 @@ const CulturaCaral = () => {
       </div>
 
       <div className="geographical-location__container">
-        <h2 className="geographical-location__title" id="ubicacion-wari">Ubicación geográfica</h2>
+        <h2 className="geographical-location__title" id="ubicacion-wari">
+          Ubicación geográfica
+        </h2>
         <div className="geographical-location__subcontainer">
           <p className="geographical-location__description">
             Floreció en los andes centrales del actual Perú se expandió en la
@@ -43,13 +48,15 @@ const CulturaCaral = () => {
       </div>
 
       <div className="history__container">
-        <h2 className="history-title" id="historia-wari">Historia</h2>
+        <h2 className="history-title" id="historia-wari">
+          Historia
+        </h2>
         <p className="history-description">
           Wari es un fenómeno político estatal que sucede durante el Horizonte
           Medio entre los años 550 y 900 d.C. aproximadamente y para su estudio
           fue dividido en etapas de desarrollo
         </p>
-        <h2>Etapas de desarrollo</h2>
+        <h2 className="history-title">Etapas de desarrollo</h2>
         <ul className="ul-culture__list">
           <li>
             <b>Horizonte Medio 1A</b> - La época 1A se caracteriza por la
@@ -93,10 +100,17 @@ const CulturaCaral = () => {
             Andes en el nivel urbanístico.
           </li>
         </ul>
+        <img
+          className="chronology__img"
+          src={CronologiaWari}
+          alt="CronologiaWari"
+        />
       </div>
 
       <div className="organization__container">
-        <h2 className="organization__title" id="organizacion-wari">Organización</h2>
+        <h2 className="organization__title" id="organizacion-wari">
+          Organización
+        </h2>
 
         <div className="social-organization__container">
           <h3 className="social-organization__subtitle">Organización social</h3>
@@ -142,7 +156,9 @@ const CulturaCaral = () => {
 
       <div className="cultural-achievements__container">
         <div className="cultural-achievements__subcontainer">
-          <h2 className="cultural-achievements__title" id="logros-wari">Logros Culturales</h2>
+          <h2 className="cultural-achievements__title" id="logros-wari">
+            Logros Culturales
+          </h2>
           <p className="cultural-achievements__description">
             Entre sus logros destacan la producción de micro herramientas para
             el trabajo en las canteras de piedra. Mazos de piedra, azadones y
@@ -163,7 +179,9 @@ const CulturaCaral = () => {
 
       <div className="beliefs__container">
         <div className="beliefs__subcontainer">
-          <h2 className="beliefs__title" id="creencias-wari">Creencias</h2>
+          <h2 className="beliefs__title" id="creencias-wari">
+            Creencias
+          </h2>
           <p className="beliefs__description">
             A través de la implantación del culto a la “Divinidad de los
             Báculos” –con seguridad, deidad agrícola– y, sobre todo, a través de
@@ -179,7 +197,9 @@ const CulturaCaral = () => {
 
       <div className="art__container">
         <div className="art__subcontainer">
-          <h2 className="art__title" id="arte-wari">Arte</h2>
+          <h2 className="art__title" id="arte-wari">
+            Arte
+          </h2>
           <p className="art__description">
             La naturaleza del estado Wari es un estado militarista disuasivo,
             persuasivo y conquistador por excelencia, y teocrático a posteriori.

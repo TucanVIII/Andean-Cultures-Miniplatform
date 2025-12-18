@@ -3,6 +3,7 @@ import CaralQuestions from "../../features/questions/CaralQuestions.jsx";
 import "../../styles/culturesArticle.css";
 
 import placeholderJPG from "../../assets/react.svg";
+import CronologiaCaral from "../../assets/CronologiaCaral.png"
 
 const CulturaCaral = () => {
   const content = (
@@ -62,11 +63,16 @@ const CulturaCaral = () => {
           <li>2300-2200 a.C. - apogeo del poder político y religioso.</li>
           <li>2200-2100 a.C. - declive y reducción del asentamiento.</li>
           <li>
-            2100–1800 a.C. - abandono progresivo por crisis ecológica,
+            2100-1800 a.C. - abandono progresivo por crisis ecológica,
             terremotos, inundaciones por el fenómeno El Niño y cambios en la
             línea costera.
           </li>
         </ul>
+        <img
+            className="chronology__img"
+            src={CronologiaCaral}
+            alt="CronologiaCaral"
+          />
       </div>
 
       <div className="organization__container">

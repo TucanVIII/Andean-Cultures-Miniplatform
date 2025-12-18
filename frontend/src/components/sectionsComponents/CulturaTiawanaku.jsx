@@ -3,6 +3,7 @@ import CaralQuestions from "../../features/questions/CaralQuestions.jsx";
 import "../../styles/culturesArticle.css";
 
 import placeholderJPG from "../../assets/react.svg";
+import CronologiaTiawanaku from "../../assets/CronologiaTiawanaku.png";
 
 const CulturaCaral = () => {
   const content = (
@@ -12,7 +13,9 @@ const CulturaCaral = () => {
       </div>
 
       <div className="background__container">
-        <h2 className="background__title" id="antecedentes-tiawanaku">Antecedentes</h2>
+        <h2 className="background__title" id="antecedentes-tiawanaku">
+          Antecedentes
+        </h2>
         <p className="background__description">
           La sociedad tiwanaku fue una civilización pre incaica desarrollada en
           el altiplano andino de sudamérica con base en la capital Tiwanaku uno
@@ -23,7 +26,9 @@ const CulturaCaral = () => {
       </div>
 
       <div className="geographical-location__container">
-        <h2 className="geographical-location__title" id="ubicacion-tiawanaku">Ubicación geográfica</h2>
+        <h2 className="geographical-location__title" id="ubicacion-tiawanaku">
+          Ubicación geográfica
+        </h2>
         <div className="geographical-location__subcontainer">
           <p className="geographical-location__description">
             El territorio natal de Tiwanaku se encuentra en el suroeste del
@@ -45,7 +50,9 @@ const CulturaCaral = () => {
       </div>
 
       <div className="history__container">
-        <h2 className="history-title" id="historia-tiawanaku">Historia</h2>
+        <h2 className="history-title" id="historia-tiawanaku">
+          Historia
+        </h2>
         <p className="history-description">
           Indudablemente, el altiplano peruano-boliviano ha sido uno de los
           escenarios más significativos donde se gestaron los procesos
@@ -93,10 +100,17 @@ const CulturaCaral = () => {
             circunstancias vinculadas a una desastrosa y larga sequía.
           </li>
         </ul>
+        <img
+          className="chronology__img"
+          src={CronologiaTiawanaku}
+          alt="CronologiaTiawanaku"
+        />
       </div>
 
       <div className="organization__container">
-        <h2 className="organization__title" id="organizacion-tiawanaku">Organización</h2>
+        <h2 className="organization__title" id="organizacion-tiawanaku">
+          Organización
+        </h2>
 
         <div className="social-organization__container">
           <h3 className="social-organization__subtitle">Organización social</h3>
@@ -151,7 +165,9 @@ const CulturaCaral = () => {
 
       <div className="cultural-achievements__container">
         <div className="cultural-achievements__subcontainer">
-          <h2 className="cultural-achievements__title" id="logros-tiawanaku">Logros Culturales</h2>
+          <h2 className="cultural-achievements__title" id="logros-tiawanaku">
+            Logros Culturales
+          </h2>
           <p className="cultural-achievements__description">
             El sitio de Tiwanaku se encuentra en el lado sur del lago Titicaca,
             a 3 840 msnm, con un promedio poblacional que según algunos no
@@ -182,7 +198,9 @@ const CulturaCaral = () => {
 
       <div className="beliefs__container">
         <div className="beliefs__subcontainer">
-          <h2 className="beliefs__title" id="creencias-tiawanaku">Creencias</h2>
+          <h2 className="beliefs__title" id="creencias-tiawanaku">
+            Creencias
+          </h2>
           <p className="beliefs__description">
             La deidad principal de Tiwanaku es aquella conocida como la “Deidad
             de los Báculos”, que representaría a un dios celestial que podría
@@ -202,15 +220,17 @@ const CulturaCaral = () => {
 
       <div className="art__container">
         <div className="art__subcontainer">
-          <h2 className="art__title" id="arte-tiawanaku">Arte</h2>
+          <h2 className="art__title" id="arte-tiawanaku">
+            Arte
+          </h2>
           <p className="art__description">
             Varios mitos recogidos por los españoles en el siglo XVI ubican el
             origen de los pueblos andinos en el sitio de Tiwanaku. Sostienen que
             de las profundidades del lago Titikaka emergió el dios Wirakocha,
             quien hizo salir el sol y la luna, y fue secando a la humanidad
             anterior hasta convertirla en piedra. En Tiwanaku dio nombres y
-            trajes a cada nación y les ordenó poblar nuevamente el mundo. 
-            Como no había en los Andes otro objeto de mayor prestigio y, por lo
+            trajes a cada nación y les ordenó poblar nuevamente el mundo. Como
+            no había en los Andes otro objeto de mayor prestigio y, por lo
             tanto, más útil en el manejo del poder que los tejidos, en algún
             momento la elite convirtió el privilegio divino de regalar ropa en
             un privilegio de los gobernantes.

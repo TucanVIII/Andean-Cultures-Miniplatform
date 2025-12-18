@@ -1,0 +1,249 @@
+/* profile-user__container */
+.profile-user__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* edit-user__container */
+.edit-user__container {
+  display: grid;
+  flex-direction: column;
+  text-align: center;
+  grid-template-columns: repeat(2, 1fr);
+  width: 90%;
+  margin: 20px;
+  gap: 15px;
+}
+
+.edit-user__title {
+  grid-column: span 2;
+  justify-self: center;
+  color: var(--color-text-I);
+  .dark & {
+    color: var(--color-text-VII);
+  }
+}
+
+.emailUser {
+  grid-column: span 2;
+  text-align: left;
+  color: var(--color-text-II);
+  .dark & {
+    color: var(--color-text-VI);
+  }
+}
+
+.nameUser {
+  grid-column: 1;
+  text-align: left;
+  color: var(--color-text-II);
+  .dark & {
+    color: var(--color-text-VI);
+  }
+}
+
+.surnameUser {
+  grid-column: 2;
+  text-align: left;
+  color: var(--color-text-II);
+  .dark & {
+    color: var(--color-text-VI);
+  }
+}
+
+.changePasswordUser {
+  grid-column: 1;
+  text-align: left;
+  color: var(--color-text-II);
+  .dark & {
+    color: var(--color-text-VI);
+  }
+}
+
+.confirmChangePasswordUser {
+  grid-column: 2;
+  text-align: left;
+  color: var(--color-text-II);
+  .dark & {
+    color: var(--color-text-VI);
+  }
+}
+
+.modify__icon {
+  color: var(--color-primary-900);
+  margin: 10px;
+  font-size: 1.4rem;
+  .dark & {
+    color: var(--color-text-VI);
+  }
+}
+
+.modify__icon:hover {
+  color: var(--color-primary-700);
+}
+
+.save__icon {
+  color: var(--color-primary-900);
+  margin: 10px;
+  font-size: 1.4rem;
+  .dark & {
+    color: var(--color-text-VI);
+  }
+}
+
+.save__icon:hover {
+  color: var(--color-primary-700);
+}
+
+.user__input{
+  background: transparent;
+}
+
+.input__style {
+ --width-of-input: 400px;
+ --border-height: 1px;
+ --border-before-color: rgba(221, 221, 221, 0.39);
+ --border-after-color: #20536a;
+ --input-hovered-color: #4985e01f;
+ position: relative;
+ width: var(--width-of-input);
+}
+
+/* styling the Input */
+.user__input {
+ color:var(--color-text-II);
+ font-size: 0.95rem;
+ background-color: transparent;
+ width: 100%;
+ box-sizing: border-box;
+ padding-inline: 0.5em;
+ padding-block: 0.7em;
+ border: none;
+ border-bottom: var(--border-height) solid var(--color-text-II);
+ .dark & {
+    color:var(--color-text-VI);
+    border-bottom: var(--border-height) solid var(--color-text-VI);
+  }
+}
+/* styling of animated border */
+.input-border {
+ position: absolute;
+ background: var(--color-primary-900);
+ width: 0%;
+ height: 2px;
+ bottom: 0;
+ left: 0;
+ transition: 0.3s;
+ .dark & {
+  background: var(--color-text-VI);
+  }
+}
+/* Hover on Input */
+input:hover {
+ background: var(--input-hovered-color);
+}
+
+input:focus {
+ outline: none;
+}
+
+input:focus ~ .input-border {
+ width: 100%;
+}
+
+/* progress-user__container */
+.progress-user__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+}
+
+.progress-user__title {
+  color: var(--color-text-I);
+  .dark & {
+    color: var(--color-text-VII);
+  }
+}
+
+.circleProgress__container {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+
+.circle-progressbar__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.progress__title {
+  font-size: 1.5rem;
+  margin: 10px;
+  color: var(--color-text-II);
+  .dark & {
+    color: var(--color-text-VI);
+  }
+}
+
+.note__title {
+  color: var(--color-text-II);
+  .dark & {
+    color: var(--color-text-VI);
+  }
+}
+
+.certificate__title {
+  color: var(--color-text-I);
+  .dark & {
+    color: var(--color-text-VII);
+  }
+}
+
+.CircularProgressbar {
+  width: 100%;
+  vertical-align: middle;
+  margin: 20px;
+}
+
+.CircularProgressbar .CircularProgressbar-path {
+  stroke: #3e98c7;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease 0s;
+}
+
+.CircularProgressbar .CircularProgressbar-trail {
+  stroke: #d6d6d6;
+}
+
+.CircularProgressbar .CircularProgressbar-text {
+  fill: #3e98c7;
+  font-size: 1rem;
+  dominant-baseline: middle;
+  text-anchor: middle;
+}
+
+.CircularProgressbar .CircularProgressbar-background {
+  fill: #d6d6d6;
+}
+
+.CircularProgressbar.CircularProgressbar-inverted
+  .CircularProgressbar-background {
+  fill: #3e98c7;
+}
+
+.CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-text {
+  fill: #fff;
+}
+
+.CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-path {
+  stroke: #fff;
+}
+
+.CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-trail {
+  stroke: transparent;
+}

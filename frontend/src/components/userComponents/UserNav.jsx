@@ -39,8 +39,8 @@ const UserNav = () => {
           <DarkModeSwitch />
         </div>
 
-        <button className="logout-button">
-          <BiSolidExit className="logout-icon" />
+        <button className="logout-button style__button">
+          <BiSolidExit className="faIcon__style" />
         </button>
       </div>
     </nav>

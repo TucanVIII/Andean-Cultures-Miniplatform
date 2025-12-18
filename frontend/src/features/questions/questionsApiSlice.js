@@ -53,7 +53,7 @@ export const questionsApiSlice = apiSlice.injectEndpoints({
         }),
         getQuizQuestion: builder.query({
             query: (sectionId) => `questions/quiz/${sectionId}`,
-            providesTags: (result,error,sectionId) => [{type:"QuizQuestions", id:sectionId}]
+            providesTags: (result,error,sectionId) => [{type:"Question", id:sectionId}]
         })
     })
 })

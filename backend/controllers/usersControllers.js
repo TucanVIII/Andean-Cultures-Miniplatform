@@ -25,13 +25,12 @@ const getUserById = asyncHandler(async (req, res) => {
     res.json(user)
 })
 
-
 // @desc Create new user
 // @route POST /user
 // @access Private
 const createNewUser = asyncHandler( async (req , res) => {
     const { firstName, lastName, email, password, sections, role } = req.body
-    if(!firstName || !lastName || !email || !password || !sections || role) {
+    if(!firstName || !lastName || !email || !password || !sections || !role) {
         return res.status(400).json({ message:"All fields are required"})
     }
 
@@ -75,7 +74,7 @@ const updateUser = asyncHandler(async (req, res) =>{
         return res.status(404).json({ message:"User not found" })
     }
 
-    const duplicate = await User.findOne({ mail }).collation({ locale:"es", strength:2 }).lean().exec()
+    const duplicate = await User.findOne({ email }).collation({ locale:"es", strength:2 }).lean().exec()
     if(duplicate && duplicate?._id.toString() !== id){
         res.status(400).json({ message:"Duplicate email already registered" })
     }

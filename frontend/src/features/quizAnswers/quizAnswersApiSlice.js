@@ -1,7 +1,7 @@
 import { apiSlice } from "../../app/api/apiSlice";
 
 export const quizApiSlice = apiSlice.injectEndpoints({
-    injectEndpoints: builder => ({
+    endpoints: builder => ({
         submitQuizAnswers: builder.mutation({
             query: ({ userId,sectionId,answers }) => ({
                 url: `/users/quiz/${sectionId}`,

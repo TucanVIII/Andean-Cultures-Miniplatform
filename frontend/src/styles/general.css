@@ -12,7 +12,7 @@ body {
   min-height: 100vh;
 }
 
-body.dark{
+body.dark {
   background-color: var(--color-background-dark);
 }
 
@@ -52,4 +52,28 @@ a {
   font-size: 1rem;
   text-decoration: none;
   cursor: pointer;
+}
+
+.style__button {
+  border: none;
+  height: 50px;
+  width: 50px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.faIcon__style {
+  font-size: 40px;
+  color: var(--color-text-II);
+  .dark &{
+      color: var(--color-text-V);
+    }
+}
+
+.faIcon__style:hover {
+  transition: transform 0.3s ease-in-out;
+  color: var(--color-primary-800);
+  .dark & {
+    color: var(--color-text-VII);
+  }
 }

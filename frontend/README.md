@@ -6,4 +6,6 @@
 - [] al terminar las secciones se debe completar un test para comprobar el conocimiento adquirido
 - [] solo si se completa el test se puede acceder a la siguiente sección
 - [] cada sección cuenta con diferentes sub secciones una parte de texto, video y el test
+-[X] Al presionar el botón de administrador debe renderizar la tabla de la lista de usuarios
+-[X] Dentro de la tabla con los usuarios al presionar el icono del correspondiente usuario que aparezca en la tabla inferior el progreso por sección del usuario seleccionado
 - [] 

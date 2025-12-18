@@ -3,6 +3,7 @@ import CaralQuestions from "../../features/questions/CaralQuestions.jsx";
 import "../../styles/culturesArticle.css";
 
 import placeholderJPG from "../../assets/react.svg";
+import CronologiaInca from "../../assets/CronologiaInca.png";
 
 const CulturaCaral = () => {
   const content = (
@@ -12,7 +13,9 @@ const CulturaCaral = () => {
       </div>
 
       <div className="background__container">
-        <h2 className="background__title" id="antecedentes-inca">Antecedentes</h2>
+        <h2 className="background__title" id="antecedentes-inca">
+          Antecedentes
+        </h2>
         <p className="background__description">
           El llamado Estado inca tuvo un tardío desenvolvimiento en el concierto
           de las altas culturas prehispánicas; milenios lo separan de los
@@ -28,7 +31,9 @@ const CulturaCaral = () => {
       </div>
 
       <div className="geographical-location__container">
-        <h2 className="geographical-location__title" id="ubicacion-inca">Ubicación geográfica</h2>
+        <h2 className="geographical-location__title" id="ubicacion-inca">
+          Ubicación geográfica
+        </h2>
         <div className="geographical-location__subcontainer">
           <p className="geographical-location__description">
             Su control se extendió sobre gran parte de los andes centrales desde
@@ -46,7 +51,9 @@ const CulturaCaral = () => {
       </div>
 
       <div className="history__container">
-        <h2 className="history-title" id="historia-inca">Historia</h2>
+        <h2 className="history-title" id="historia-inca">
+          Historia
+        </h2>
         <p className="history-description">
           El inicio de la civilización incaica se remontaría aproximadamente al
           año 1100 de nuestra era, aunque este supuesto inicio, está basado,
@@ -130,10 +137,17 @@ const CulturaCaral = () => {
             manos de los nuevos soberanos de los Andes.
           </li>
         </ul>
+        <img
+          className="chronology__img"
+          src={CronologiaInca}
+          alt="CronologiaInca"
+        />
       </div>
 
       <div className="organization__container">
-        <h2 className="organization__title" id="organizacion-inca">Organización</h2>
+        <h2 className="organization__title" id="organizacion-inca">
+          Organización
+        </h2>
 
         <div className="social-organization__container">
           <h3 className="social-organization__subtitle">Organización social</h3>
@@ -208,7 +222,9 @@ const CulturaCaral = () => {
 
       <div className="cultural-achievements__container">
         <div className="cultural-achievements__subcontainer">
-          <h2 className="cultural-achievements__title" id="logros-inca">Logros Culturales</h2>
+          <h2 className="cultural-achievements__title" id="logros-inca">
+            Logros Culturales
+          </h2>
           <p className="cultural-achievements__description">
             Su riqueza y prestigio prevalecieron en el área nor central por casi
             un milenio y fomentaron cambios sociales cualitativos en las
@@ -242,7 +258,9 @@ const CulturaCaral = () => {
 
       <div className="beliefs__container">
         <div className="beliefs__subcontainer">
-          <h2 className="beliefs__title" id="creencias-inca">Creencias</h2>
+          <h2 className="beliefs__title" id="creencias-inca">
+            Creencias
+          </h2>
           <p className="beliefs__description">
             Todas las actividades de esta civilización estaban imbuidas de
             religión, todo era místico y, de una forma u otra, todo tenía origen
@@ -262,7 +280,9 @@ const CulturaCaral = () => {
 
       <div className="art__container">
         <div className="art__subcontainer">
-          <h2 className="art__title" id="arte-inca">Arte</h2>
+          <h2 className="art__title" id="arte-inca">
+            Arte
+          </h2>
           <p className="art__description">
             Caral evidencia la realización de concentraciones humanas periódicas
             donde se combinaban los traba-jos colectivos en las construcciones,
