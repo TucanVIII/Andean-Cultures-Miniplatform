@@ -1,47 +1,142 @@
-.table--users__container{
-    display: flex;
-    justify-content: center;
+/* TABLES ADMIN STYLE*/
+.table--users__container {
+  display: flex;
+  justify-content: center;
 }
 
-.table--users{
-    width: 95%;
-    gap: 10px;
-    margin: 10px;
-    margin-top: 20px;
+.table--users {
+  width: 95%;
+  gap: 10px;
+  margin: 10px;
+  margin-top: 20px;
 }
 
-.table__thead{
+.table__thead {
+  background-color: var(--color-primary-950);
+  .dark & {
     background-color: var(--color-text-III);
+  }
 }
 
-.table__thead th{
-    padding: 5px  0px;
+.table__thead th {
+  padding: 5px 0px;
 }
 
-.table__tbody{
+.table__tbody {
+  background-color: var(--color-text-VI);
+  color: var(--color-primary-950);
+  text-align: center;
+  .dark & {
     background-color: var(--color-text-IV);
-    text-align: center;
+    color: var(--color-text-VII);
+  }
 }
 
-.table__cell{
-    padding: 8px 0px;
+.table__row:hover {
+  background-color: var(--color-primary-200);
+  .dark & {
+    background-color: var(--color-text-III);
+  }
 }
 
-.table--sections__container{
+.table__cell {
+  padding: 8px 0px;
+}
+
+.table--sections__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.table-sections {
+  width: 50%;
+  gap: 10pxx;
+  margin: 10px;
+  margin-top: 10px;
+}
+
+.student-progress__title {
+  text-align: center;
+}
+
+.student-progress__container h3{
+  color: var(--color-primary-950);
+  .dark & {
+    color: var(--color-text-VII);
+  }
+}
+
+/* CARDS QUESTIONS ADMIN */
+.questions-main__container {
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  width: 95%;
+  margin: 0 auto;
+  border: 2px solid var(--color-primary-950);
+  color: var(--color-text-II);
+  .dark & {
+    border: 2px solid var(--color-text-VI);
+    color: var(--color-text-VI);
+  }
+}
+
+.questions__subcontainer {
+  width: 95%;
+  padding: 10px;
+}
+
+.questions__subcontainer h2 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.questions__card {
+  display: flex;
+  justify-content: center;
+  border: 2px solid var(--color-primary-950);
+  padding: 5px;
+  margin-bottom: 15px;
+  .dark & {
+    border: 2px solid var(--color-text-VI);
+    color: var(--color-text-VI);
+  }
+}
+
+.questions__card input,
+.questions__card select {
+  padding: 5px;
+  margin: 5px;
+  background-color: var(--color-text-VI);
+  color: var(--color-text-II);
+  border: none;
+  .dark & {
+    background-color: var(--color-text-IV);
+    color: var(--color-text-VII);
+  }
+}
+
+.questions__card input:hover,
+.questions__card select:hover {
+  background-color: var(--color-primary-100);
+  color: var(--color-primary-1000);
+  .dark & {
+    color: var(--color-text-VII);
+    background-color: var(--color-text-III);
+  }
+}
+
+.questions__card input:disabled,
+.questions__card select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-actions{
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-}
+    flex-direction: row;
 
-.table-sections{
-    width: 50%;
-    gap: 10pxx;
-    margin: 10px;
-    margin-top: 10px;
-}
-
-.student-progress__title{
-    text-align: center;
 }
