@@ -15,6 +15,7 @@ const QuizSchema = new mongoose.Schema(
     },
     totalQuestions: {
       type: Number,
+      default:0,
       required: true,
     },
     completionDate: {

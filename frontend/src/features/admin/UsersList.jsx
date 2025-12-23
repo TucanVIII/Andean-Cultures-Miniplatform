@@ -1,6 +1,6 @@
 import User from "../users/User.jsx";
-import Loader from "../Loader.jsx";
-import { useGetUsersQuery } from "../../features/users/usersApiSlice.js";
+import Loader from "../ui/Loader.jsx";
+import { useGetAllUsersQuery } from "../../features/users/usersApiSlice.js";
 import "../../styles/tablesStyle.css";
 
 const UsersList = () => {
@@ -10,7 +10,7 @@ const UsersList = () => {
     isSuccess,
     isError,
     error,
-  } = useGetUsersQuery(undefined, {
+  } = useGetAllUsersQuery(undefined, {
     pollingInterval: 60000,
     refetchOnFocus: true,
     refetchOnMountArgChange: true,
@@ -37,6 +37,7 @@ const UsersList = () => {
 
     content = (
       <div className="table--users__container">
+        <h2>Lista de usuarios registrados</h2>
         <table className="table table--users">
           <thead className="table__thead">
             <tr>

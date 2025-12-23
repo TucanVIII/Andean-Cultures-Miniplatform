@@ -12,9 +12,10 @@ router
   .route("/")
   .get(getAllUsers)
   .post(createNewUser)
+  
+router
+  .route("/:id")
+  .get(getUserById)
   .patch(updateUser)
   .delete(deleteUser);
-
-router
-  .get("/:id",getUserById)
 export default router;

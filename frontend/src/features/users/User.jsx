@@ -1,25 +1,35 @@
 import { memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { FaUserGraduate } from "react-icons/fa";
+import { FaUserGraduate, FaEyeSlash } from "react-icons/fa";
 import { selectUserById } from "../../features/users/usersApiSlice.js";
-import { setSelectedUserId } from "../ui/uiSlice.js";
+import { setSelectedUserId, clearSelectedUserId } from "../ui/uiSlice.js";
 
 import "../../styles/tablesStyle.css";
 
 const User = ({ userId }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => selectUserById(state, userId));
+  const selectedUserId = useSelector((state) => state.ui.selectedUserId);
+  const isSelected = selectedUserId === userId;
 
   if (user) {
     return (
       <tr className="table__row user">
         <td className={"table__cell"}>
-          {user.id?<button
+          <button
             className="style__button"
-            onClick={()=>dispatch(setSelectedUserId(userId))}
+            onClick={() =>
+              dispatch(
+                isSelected ? clearSelectedUserId() : setSelectedUserId(userId)
+              )
+            }
           >
-            <FaUserGraduate className="faIcon__style" />
-          </button>:null}
+            {isSelected ? (
+              <FaEyeSlash className="faIcon__style" />
+            ) : (
+              <FaUserGraduate className="faIcon__style" />
+            )}
+          </button>
         </td>
         <td className={"table__cell"}>{user.firstName}</td>
         <td className={"table__cell"}>{user.lastName}</td>

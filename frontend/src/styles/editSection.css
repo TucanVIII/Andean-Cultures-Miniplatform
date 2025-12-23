@@ -1,0 +1,119 @@
+.edit-section__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px 0px;
+}
+
+.edit-section__container label {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-section__container select {
+  padding: 5px 10px;
+}
+
+/* CARD SECTIONS ADMIN */
+.section-main__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  border: 2px solid var(--color-primary-950);
+  color: var(--color-text-II);
+  .dark & {
+    border: 2px solid var(--color-text-VI);
+    color: var(--color-text-VI);
+  }
+}
+
+.section-main__subcontainer {
+  width: 95%;
+  padding: 10px;
+}
+
+.section-main__subcontainer h2 {
+  padding: 10px;
+  border-bottom: 2px solid var(--color-primary-950);
+  .dark & {
+    border-bottom: 2px solid var(--color-text-VI);
+    color: var(--color-text-VI);
+  }
+}
+
+.section__inner {
+  display: flex;
+  flex-direction: row;
+}
+
+.inputs-inner{
+  width: 90%;
+}
+
+.title_subcontainer{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 10px;
+}
+
+.title_subcontainer input {
+  width: 100%;
+}
+
+
+.title_subcontainer label:first-child{
+    flex:0 0 80%;
+}
+
+.title_subcontainer label:last-child {
+    flex: 0 0 20%;
+}
+
+
+.bottom-inner {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 100%;
+}
+
+.bottom-inner input,textarea{
+    width: 100%;
+}
+
+.questions__buttons {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+.questions__buttons button {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 10px;
+  padding: 0 20px;
+}
+
+.modify-section__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 10%;
+}
+
+.modify-section__buttons .column {
+  display: flex;
+  flex-direction: column;
+}

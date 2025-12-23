@@ -107,7 +107,7 @@ const deleteUser = asyncHandler(async (req, res) => {
     }
 
     await User.deleteOne({"_id":id})
-    res.json({ message:`Usuario ${user.email} fue eliminado correctamente`})
+    res.json({ message:`Usuario ${user.email} was removed successfully`})
 })
 
 export {

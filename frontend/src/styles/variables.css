@@ -32,9 +32,11 @@
   --color-footer-dark: #1f1d1d;
 
   /* COLORES DE ESTADO (Feedback) */
-  --color-success: #4caf50;
+  --color-success: #85ee88;
+    --color-success2: #36c43b;
   --color-warning: #ffc107;
-  --color-error: #f44336;
+  --color-error: #f6756b;
+  --color-error2: #f83123;
   --color-info: #03a9f4;
 
   /* FONT AND STYLE */

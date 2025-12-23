@@ -12,7 +12,7 @@ const Login = () => {
           <div className="wave-group">
             <input type="text" className="input" required={true} />
             <span className="bar"></span>
-            <label htmlFor="" className="label">
+            <label className="label">
               <span className="label-char" style={{'--index': 0}}>U</span>
               <span className="label-char" style={{'--index': 1}}>S</span>
               <span className="label-char" style={{'--index': 2}}>U</span>
@@ -26,7 +26,7 @@ const Login = () => {
           <div className="wave-group">
             <input type="text" className="input" required={true} />
             <span className="bar"></span>
-            <label htmlFor="" className="label">
+            <label className="label">
               <span className="label-char" style={{'--index': 0}}>C</span>
               <span className="label-char" style={{'--index': 1}}>O</span>
               <span className="label-char" style={{'--index': 2}}>N</span>

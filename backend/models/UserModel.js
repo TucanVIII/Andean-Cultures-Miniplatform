@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
-import SectionSchema from "./SectionModel.js";
-import CertificateSchema from "./CertificateModel.js"
+import SectionProgressSchema from "./SectionProgressModel.js";
+import CertificateSchema from "./CertificateModel.js";
 
 const userSchema = new mongoose.Schema(
   {
@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    sections: [SectionSchema],
+    sections: [SectionProgressSchema],
     certificate: CertificateSchema,
   },{
     timestamps: true,

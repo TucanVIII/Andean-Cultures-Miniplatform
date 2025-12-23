@@ -10,7 +10,7 @@ const getAllQuestions = asyncHandler(async(req,res) => {
     if(!questions?.length){
         return res.status(404).json({ message:"Not questions found" })
     }
-    res.json(questions)
+    res.json(questions || [])
 });
 
 // @desc POST create new question
@@ -74,7 +74,7 @@ const deleteQuestion = asyncHandler(async(req,res) => {
 });
 
 // @desc GET question to the user interface
-// @route GET /quiz/:sectionId
+// @route GET /questions/quiz/:sectionId
 // @access Private
 const getQuizQuestion = asyncHandler(async(req,res) => {
     const { sectionId } = req.params;

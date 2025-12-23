@@ -1,5 +1,5 @@
 import { useNavigate, Link } from "react-router-dom";
-import DarkModeSwitch from "../../features/DarkModeSwitch";
+import DarkModeSwitch from "../../features/ui/DarkModeSwitch.jsx"
 
 import "../../styles/dashNavbar.css";
 

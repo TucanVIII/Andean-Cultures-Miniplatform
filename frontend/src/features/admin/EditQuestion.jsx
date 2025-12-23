@@ -1,22 +1,42 @@
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { selectQuestionById } from "../questions/questionsApiSlice.js";
-import { useUpdateQuestionMutation } from "../questions/questionsApiSlice.js";
+import {
+  useUpdateQuestionMutation,
+  useDeleteQuestionMutation,
+  useGetAllQuestionsQuery,
+} from "../questions/questionsApiSlice.js";
 
+import { AiFillDelete } from "react-icons/ai";
 import { FaRegSave } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
 
-const QuestionEdit = ({ questionId }) => {
-  const question = useSelector((state) =>
-    selectQuestionById(state, questionId)
+const EditQuestion = ({ questionId, sectionId }) => {
+  const { question } = useGetAllQuestionsQuery(
+    sectionId ? { sectionId } : undefined,
+    {
+      selectFromResult: ({ data }) => ({
+        // Buscamos dentro de las entidades por ID
+        question: data?.entities[questionId],
+      }),
+    }
   );
 
-  const [statement, setStatement] = useState(question.statement);
-  const [options, setOptions] = useState([...question.options]);
-  const [correctAnswer, setCorrectAnswer] = useState(question.correctAnswer);
+  const [statement, setStatement] = useState("");
+  const [options, setOptions] = useState([]);
+  const [correctAnswer, setCorrectAnswer] = useState("");
 
   const [isEditing, setIsEditing] = useState(false);
   const [updateQuestion] = useUpdateQuestionMutation();
+  const [deleteQuestion] = useDeleteQuestionMutation();
+
+  useEffect(() => {
+    if (question) {
+      setStatement(question.statement);
+      setOptions(question.options ?? []);
+      setCorrectAnswer(question.correctAnswer ?? "");
+    }
+  }, [question]);
 
   const onSave = async () => {
     await updateQuestion({
@@ -33,9 +53,20 @@ const QuestionEdit = ({ questionId }) => {
     setIsEditing(true);
   };
 
+  const onDelete = async () => {
+    await deleteQuestion({
+      id: questionId,
+      sectionId: question.sectionId,
+    });
+  };
+
+  if (!question) {
+    return null;
+  }
+
   return (
     <div className="questions__card">
-      <label htmlFor="">
+      <label>
         Pregunta:
         <input
           type="text"
@@ -51,8 +82,8 @@ const QuestionEdit = ({ questionId }) => {
         {options.map((option, index) => (
           <input
             type="text"
-            disabled={!isEditing}
             key={index}
+            disabled={!isEditing}
             value={option}
             onChange={(e) => {
               const copy = [...options];
@@ -63,7 +94,7 @@ const QuestionEdit = ({ questionId }) => {
         ))}
       </div>
 
-      <label htmlFor="">
+      <label>
         Respuesta correcta:
         <select
           disabled={!isEditing}
@@ -71,7 +102,7 @@ const QuestionEdit = ({ questionId }) => {
           onChange={(e) => setCorrectAnswer(e.target.value)}
           required
         >
-          <option>Seleccionar:</option>
+          <option value="">Seleccionar:</option>
           {options.map((option, index) => (
             <option key={index} value={option}>
               {option}
@@ -86,13 +117,18 @@ const QuestionEdit = ({ questionId }) => {
             <FaPencil className="faIcon__style" />
           </button>
         ) : (
-          <button onClick={onSave} className="style__button">
-            <FaRegSave className="faIcon__style" />
-          </button>
+          <div className="modify__buttons">
+            <button onClick={onSave} className="style__button">
+              <FaRegSave className="faIcon__style" />
+            </button>
+            <button onClick={onDelete} className="style__button">
+              <AiFillDelete className="faIcon__style" />
+            </button>
+          </div>
         )}
       </div>
     </div>
   );
 };
 
-export default QuestionEdit;
+export default EditQuestion;

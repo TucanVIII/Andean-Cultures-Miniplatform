@@ -65,9 +65,9 @@ a {
 .faIcon__style {
   font-size: 40px;
   color: var(--color-text-II);
-  .dark &{
-      color: var(--color-text-V);
-    }
+  .dark & {
+    color: var(--color-text-V);
+  }
 }
 
 .faIcon__style:hover {
@@ -76,4 +76,49 @@ a {
   .dark & {
     color: var(--color-text-VII);
   }
+}
+
+.faIcon__style-check {
+  font-size: 1.2rem;
+  margin: 5px;
+  color: var(--color-success);
+}
+
+.faIcon__style-cross {
+  font-size: 1.2rem;
+  margin: 5px;
+  color: var(--color-error);
+}
+
+.close__button {
+  color: var(--color-error);
+  .dark & {
+    color: var(--color-error);
+  }
+}
+
+.close__button:hover {
+  color: var(--color-error2);
+  .dark & {
+    color: var(--color-error2);
+  }
+}
+
+.success,
+.error {
+  border: 1px solid;
+  margin: 10px 0px;
+  padding: 15px 10px 15px 50px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+}
+
+.success{
+  background-color: var(--color-success);
+  color: var(--color-success2);
+}
+
+.error{
+  background-color: var(--color-error);
+  color: var(--color-error2);
 }

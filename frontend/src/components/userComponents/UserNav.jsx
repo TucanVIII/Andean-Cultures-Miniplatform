@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { BiSolidExit } from "react-icons/bi";
 import { FaUser, FaPlayCircle, FaHome } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
-import DarkModeSwitch from "../../features/DarkModeSwitch";
+import DarkModeSwitch from "../../features/ui/DarkModeSwitch.jsx";
 import "../../styles/userNav.css";
 
 import appLogo from "../../assets/appLogo.png";

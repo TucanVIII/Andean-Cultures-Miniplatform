@@ -12,6 +12,7 @@ import userRoutes from "./routes/userRoutes.js";
 import sectionRoutes from "./routes/sectionRoutes.js";
 import quizAnswersRoutes from "./routes/quizAnswersRoutes.js";
 import questionsRoutes from "./routes/questionsRoutes.js";
+import progressRoutes from "./routes/progressRoute.js";
 
 // Middlewares to handle logs and log errors
 import { logger, logEvents } from "./middleware/loggers.js";
@@ -43,11 +44,12 @@ app.use(cookieParser());
 app.use("/", express.static(path.join(__dirname, "public")));
 
 // Routes management
-app.use("/", rootRouter);
-app.use("/users", userRoutes);
-app.use("/users/progress", sectionRoutes);
-app.use("/users/quiz", quizAnswersRoutes);
-app.use("/questions",questionsRoutes);
+app.use("/api/v2/", rootRouter);
+app.use("/api/v2/users", userRoutes);
+app.use("/api/v2/users/progress", progressRoutes);
+app.use("/api/v2/users/quiz", quizAnswersRoutes);
+app.use("/api/v2/questions",questionsRoutes);
+app.use("/api/v2/sections",sectionRoutes);
 app.use(/.*/, (req, res) => {
   res.status(404);
   if (req.accepts("html")) {

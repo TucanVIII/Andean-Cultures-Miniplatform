@@ -4,6 +4,7 @@ const QuestionSchema = new mongoose.Schema(
     {
         sectionId: {
             type: mongoose.Schema.Types.ObjectId,
+            ref: "Section",
             required: true
         },
         statement: {

@@ -1,13 +1,8 @@
 import mongoose from "mongoose";
-import QuizSchema from "./QuizModel.js"
 
 const SectionSchema = new mongoose.Schema(
   {
-    sectionId: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-    },
-    sectionName: {
+    sectionTitle: {
       type: String,
       required: true,
     },
@@ -15,23 +10,17 @@ const SectionSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    progress: {
+    theory: {
       type: String,
       required: true,
-      enum: ["pending", "inProgress", "completed"],
-      default: "pending",
     },
-    theoryCompleted: {
-      type: Boolean,
-      default: false,
-    },
-    videoCompleted: {
-      type: Boolean,
-      default: false,
-    },
-    quiz: QuizSchema,
+    videoUrl: {
+      type: String,
+      required: true,
+    }
   },
-  { _id: false }
+  { timestamps: true }
 );
 
-export default SectionSchema;
+export default mongoose.model("Section",SectionSchema);
+

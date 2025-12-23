@@ -1,13 +1,13 @@
 import UsersList from "../../features/admin/UsersList.jsx";
 import TableUserProgress from "../../features/admin/TableUserProgress.jsx";
-import QuestionsList from "../../features/admin/QuestionsList.jsx";
+import EditSection from "../../features/admin/EditSection.jsx";
 
 const AdministratorSection = () => {
   return (
     <div className="tables-users__container">
       <UsersList />
       <TableUserProgress />
-      <QuestionsList />
+      <EditSection />
     </div>
   );
 };

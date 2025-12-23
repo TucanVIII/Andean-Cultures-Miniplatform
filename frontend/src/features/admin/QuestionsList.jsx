@@ -1,17 +1,17 @@
-import { useGetQuestionsQuery } from "../questions/questionsApiSlice.js";
+import { useGetAllQuestionsQuery } from "../questions/questionsApiSlice.js";
 
-import QuestionEdit from "./QuestionEdit.jsx";
+import EditQuestion from "./EditQuestion.jsx";
+import { FaTimes } from "react-icons/fa";
+import Loader from "../ui/Loader.jsx";
 
-import Loader from "../Loader.jsx";
-
-const QuestionsList = () => {
+const QuestionsList = ({ sectionId, onClose }) => {
   const {
     data: questions,
     isLoading,
     isSuccess,
     isError,
     error,
-  } = useGetQuestionsQuery();
+  } = useGetAllQuestionsQuery(sectionId ? { sectionId } : undefined);
 
   if (isLoading) {
     return <Loader />;
@@ -23,19 +23,32 @@ const QuestionsList = () => {
 
   if (isSuccess) {
     const { ids } = questions;
+
     return (
       <section className="questions-main__container">
         <div className="questions__subcontainer">
-          <h2>Administrar preguntas:</h2>
+          <div className="inner-title">
+            <h2>Modificar preguntas:</h2>
+            <button className="style__button" onClick={onClose}>
+              <FaTimes className="faIcon__style close__button" />
+            </button>
+          </div>
+
           <div className="questions__edit">
-            {ids.map((questionId) => (
-              <QuestionEdit key={questionId} questionId={questionId} />
-            ))}
+            {ids.length === 0 ? (
+              <p>No hay preguntas en esta sección</p>
+            ) : (
+              ids.map((questionId) => (
+                <EditQuestion key={questionId} questionId={questionId} sectionId={sectionId}/>
+              ))
+            )}
           </div>
         </div>
       </section>
     );
   }
+
+  return null;
 };
 
 export default QuestionsList;

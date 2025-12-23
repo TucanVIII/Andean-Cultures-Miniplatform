@@ -3,7 +3,7 @@ import { useState,useEffect } from "react"
 import { FaSun } from "react-icons/fa";
 import { FaMoon } from "react-icons/fa6";
 
-import "../styles/darkMode.css"
+import "../../styles/darkMode.css";
 
 const DarkModeSwitch = () => {
 

@@ -1,4 +1,4 @@
-import Loader from "../../features/Loader.jsx";
+import Loader from "../../features/ui/Loader.jsx";
 import { FaRegSave } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
 import { CircularProgressbar } from "react-circular-progressbar";

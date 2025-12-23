@@ -8,9 +8,12 @@ const uiSlice = createSlice({
     reducers: {
         setSelectedUserId: (state,action) => {
             state.selectedUserId  = action.payload
-        } 
+        },
+        clearSelectedUserId: (state)  => {
+            state.selectedUserId = null
+        }
     }
 })
 
-export const { setSelectedUserId } = uiSlice.actions;
+export const { setSelectedUserId,clearSelectedUserId } = uiSlice.actions;
 export default uiSlice.reducer;
