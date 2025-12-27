@@ -8,6 +8,7 @@ import cors from "cors";
 
 // Routes imports
 import rootRouter from "./routes/root.js";
+import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import sectionRoutes from "./routes/sectionRoutes.js";
 import quizAnswersRoutes from "./routes/quizAnswersRoutes.js";
@@ -45,6 +46,7 @@ app.use("/", express.static(path.join(__dirname, "public")));
 
 // Routes management
 app.use("/api/v2/", rootRouter);
+app.use("/api/v2/auth", authRoutes);
 app.use("/api/v2/users", userRoutes);
 app.use("/api/v2/users/progress", progressRoutes);
 app.use("/api/v2/users/quiz", quizAnswersRoutes);

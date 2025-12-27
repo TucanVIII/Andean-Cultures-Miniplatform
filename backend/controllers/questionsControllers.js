@@ -78,7 +78,7 @@ const deleteQuestion = asyncHandler(async(req,res) => {
 // @access Private
 const getQuizQuestion = asyncHandler(async(req,res) => {
     const { sectionId } = req.params;
-    const questions = await Questions.find({ sectionId }).lean();
+    const questions = await Questions.find({ sectionId }).select('+correctAnswer').lean();
 
     if(!questions || questions.length===0){
         return res.status(404).json({ message:"Question not found" })

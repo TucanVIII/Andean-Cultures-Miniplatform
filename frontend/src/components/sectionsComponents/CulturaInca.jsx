@@ -1,11 +1,11 @@
-import CaralQuestions from "../../features/questions/CaralQuestions.jsx";
+import QuestionsTest from "../../features/questions/QuestionsTest.jsx";
 
 import "../../styles/culturesArticle.css";
 
 import placeholderJPG from "../../assets/react.svg";
 import CronologiaInca from "../../assets/CronologiaInca.png";
 
-const CulturaCaral = () => {
+const CulturaCaral = ({ sectionId }) => {
   const content = (
     <section className="main-culture__container">
       <div className="main-title__container">
@@ -188,6 +188,7 @@ const CulturaCaral = () => {
             preciada proveniente del Ecuador) valvas o choro zapato. La
             jerarquía social Huno.- Señor gobernante del valle y conductor del
             gobierno del Estado.
+          </p>
             <ul className="ul-culture__list">
               <li>
                 <b>Curacas.-</b> Autoridad de actividades administrativas,
@@ -214,7 +215,6 @@ const CulturaCaral = () => {
                 Allauca Huari.
               </li>
             </ul>
-          </p>
         </div>
 
         <img className="organization__img" src={placeholderJPG} alt="" />
@@ -302,11 +302,11 @@ const CulturaCaral = () => {
 
       <div className="video__container">
         <h2 id="video-inca">Video</h2>
-        <img src="" alt="" />
+        <img src={placeholderJPG} alt="" />
       </div>
 
       <div className="questions-container">
-        <CaralQuestions />
+        <QuestionsTest sectionId={sectionId}/>
       </div>
     </section>
   );

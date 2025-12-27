@@ -8,6 +8,7 @@ import MainMenuContent from "./components/mainMenuComponents/MainMenuContent.jsx
 import SectionsLayout from"./components/mainMenuComponents/SectionsLayout.jsx";
 import ProfileUser from "./components/mainMenuComponents/ProfileUser.jsx";
 import AdministratorSection from "./components/mainMenuComponents/AdministratorSection.jsx";
+import Prefetch from "./features/auth/Prefetch.js";
 
 function App() {
   return(
@@ -17,12 +18,14 @@ function App() {
         <Route index element={<Public />}/>
         <Route path="login" element={<Login />}/>
         {/* Protected routes */}
+        <Route element={<Prefetch />}>
         <Route path="menu" element={<UserMainMenu />}>
           <Route index element={<MainMenuContent />} />
           <Route path="sections" element={<SectionsLayout />} />
           <Route path="profile" element={<ProfileUser />} />
           <Route path="administrator" element={<AdministratorSection />} />
         </Route>{/* End protected routes */}
+        </Route>
       </Route>
     </Routes>
   );

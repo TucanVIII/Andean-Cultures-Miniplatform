@@ -1,11 +1,11 @@
-import CaralQuestions from "../../features/questions/CaralQuestions.jsx";
+import QuestionsTest from "../../features/questions/QuestionsTest.jsx";
 
 import "../../styles/culturesArticle.css";
 
 import placeholderJPG from "../../assets/react.svg";
 import CronologiaTiawanaku from "../../assets/CronologiaTiawanaku.png";
 
-const CulturaCaral = () => {
+const CulturaCaral = ({ sectionId }) => {
   const content = (
     <section className="main-culture__container">
       <div className="main-title__container">
@@ -241,11 +241,11 @@ const CulturaCaral = () => {
 
       <div className="video__container">
         <h2 id="video-tiawanaku">Video</h2>
-        <img src="" alt="" />
+        <img src={placeholderJPG} alt="" />
       </div>
 
       <div className="questions-container">
-        <CaralQuestions />
+        <QuestionsTest sectionId={sectionId}/>
       </div>
     </section>
   );

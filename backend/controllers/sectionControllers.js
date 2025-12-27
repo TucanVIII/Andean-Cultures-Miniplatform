@@ -66,6 +66,13 @@ const updateSection = asyncHandler(async(req,res) => {
   if(!section) {
     return res.status(404).json({ message:"Section not found"})
   }
+  
+  const duplicate = await Section.findOne({ sectionTitle })
+    .collation({ locale: "es", strength: 2 }).lean()
+    
+  if (duplicate && duplicate._id.toString() !== id) {
+    return res.status(409).json({ message: "El nuevo título ya está en uso" })
+  }
 
   section.sectionTitle = sectionTitle;
   section.order = order;
@@ -74,7 +81,7 @@ const updateSection = asyncHandler(async(req,res) => {
 
   const updatedSection = await section.save();
 
-  res.json({ message:`Section ${updatedSection} was updated`})
+  res.json({ message:`Section ${updatedSection.sectionTitle} was updated`})
 })
 
 // @desc delete section
@@ -99,14 +106,12 @@ const deleteSection = asyncHandler(async(req,res) => {
 // @route PATCH /users/progress/:sectionId
 // @access Private
 const updateSectionProgress = asyncHandler(async (req, res) => {
-  
-  const userId = req.userId;
+  // the JWT middleware sets `req.user` to the user's email
+  const userEmail = req.user;
   const { sectionId } = req.params;
   const { isTheory, isVideo } = req.body;
-  if (!sectionId || !userId) {
-    return res
-      .status(404)
-      .json({ message: "Section Id and user Id are required" });
+  if (!sectionId || !userEmail) {
+    return res.status(404).json({ message: "Section Id and user email are required" });
   }
 
   let updateFields = {};
@@ -120,10 +125,11 @@ const updateSectionProgress = asyncHandler(async (req, res) => {
   }
 
   const updatedUser = await User.findOneAndUpdate(
-    { _id: userId, "sections.sectionId": sectionId },
+    { email: userEmail, "sections.sectionId": sectionId },
     { $set: updateFields },
     { new: true }
-  ).select("-password")
+  ).select("-password");
+
   if (!updatedUser) {
     return res.status(404).json({ message: "User or section not found" });
   }

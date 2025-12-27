@@ -2,26 +2,16 @@ import { useEffect, useState } from "react";
 
 import AccordionSections from "../../features/sections/AccordionSections";
 
-import CulturaCaral from "../sectionsComponents/CulturaCaral.jsx";
-import CulturaWari from "../sectionsComponents/CulturaWari.jsx";
-import CulturaTiawanaku from "../sectionsComponents/CulturaTiawanaku.jsx";
-import CulturaInca from "../sectionsComponents/CulturaInca.jsx";
+import IntroSections from "../sectionsComponents/IntroSections.jsx";
 
 import "../../styles/sectionsLayout.css";
 
-const cultureComponents = {
-  CARAL: CulturaCaral,
-  WARI: CulturaWari,
-  TIAWANAKU: CulturaTiawanaku,
-  INCA: CulturaInca,
-};
-
 const SectionsLayout = () => {
-  const [selectedCulture, setSelectedCulture] = useState(null);
+  const [selectedSection, setSelectedSection] = useState(null);
   const [pendingSectionId, setPendingSectionId] = useState(null);
 
   const handleSelectedCulture = (cultureTitle) => {
-    setSelectedCulture(cultureTitle);
+    setSelectedSection(cultureTitle);
     setPendingSectionId(null);
   };
 
@@ -39,26 +29,49 @@ const SectionsLayout = () => {
 
   useEffect(() => {
     if (pendingSectionId) handleScroll(pendingSectionId);
-  }, [pendingSectionId, selectedCulture]);
+  }, [pendingSectionId]);
 
-  const CultureComponent = cultureComponents[selectedCulture];
+  const generateId = (subtitle) => {
+    if (!subtitle) return "";
+    const cleanSubtitle = subtitle
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/\s+/g, "-");
+    const culture = selectedSection?.sectionTitle
+      ? selectedSection.sectionTitle
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/\s+/g, "-")
+      : "";
+    return `${cleanSubtitle}-${culture}`;
+  };
 
   const content = (
     <main className="main-container">
       <div className="accordion-container">
         <AccordionSections
-          selectedCulture={selectedCulture}
-          onSelectedCulture={handleSelectedCulture}
           onScrollSection={handleScrollToItemId}
+          onSelectedCulture={handleSelectedCulture}
+          selectedCulture={selectedSection?.sectionTitle}
         />
       </div>
 
       <div className="article-container">
         <div className="culture-container">
-          {CultureComponent ? (
-            <CultureComponent />
+          {selectedSection ? (
+            <>
+              {selectedSection.staticComponent}
+              {selectedSection.contentBlocks?.map((block, index) => (
+                <div key={index} id={generateId(block.subtitle)}>
+                  <h2>{block.subtitle}</h2>
+                  <p>{block.content}</p>
+                </div>
+              ))}
+            </>
           ) : (
-            <h2>Seleccione una cultura del acordeón para comenzar</h2>
+            <IntroSections />
           )}
         </div>
       </div>
