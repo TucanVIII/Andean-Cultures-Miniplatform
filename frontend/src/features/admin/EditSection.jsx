@@ -58,9 +58,7 @@ const EditSection = ({ sectionId }) => {
     }
   }, [section]);
 
-  if (!sections.length) {
-    return <Loader />;
-  }
+  if (!sections.length) return <Loader />;
 
   const onSave = async () => {
     await updateSection({

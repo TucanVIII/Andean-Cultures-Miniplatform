@@ -26,13 +26,18 @@ const login = asyncHandler(async (req, res) => {
 
   const accessToken = jwt.sign(
     {
-      "UserInfo": { "email": foundUser.email, "role":foundUser.role },
+      "UserInfo": {
+        "id": foundUser._id.toString(),
+        "email": foundUser.email,
+        "role": foundUser.role,
+        "firstName": foundUser.firstName,
+      },
     },
     process.env.ACCESS_TOKEN_SECRET,
     { expiresIn: "15m" }
   );
   const refreshToken = jwt.sign(
-    { UserInfo: { email: foundUser.email, role: foundUser.role } },
+    { UserInfo: { id: foundUser._id.toString(),email: foundUser.email, role: foundUser.role, firstName: foundUser.firstName } },
     process.env.REFRESH_TOKEN,
     { expiresIn: "1d" }
   );
@@ -40,7 +45,7 @@ const login = asyncHandler(async (req, res) => {
   res.cookie("jwt", refreshToken, {
     httpOnly: true, // accessible only for web server
     secure: process.env.NODE_ENV === "production", //https
-    sameSite: "None", //cross-site-cookie
+    sameSite: "Lax", //cross-site-cookie
     maxAge: 7 * 24 * 60 * 60 * 1000, // cookie expiry
   });
 
@@ -70,7 +75,7 @@ const refresh = asyncHandler(async (req, res) => {
   if (!foundUser) return res.status(401).json({ message: "Unauthorized" });
 
   const accessToken = jwt.sign(
-    { UserInfo: { email: foundUser.email, role: foundUser.role } },
+    { UserInfo: { id: foundUser._id.toString(),email: foundUser.email, role: foundUser.role } },
     process.env.ACCESS_TOKEN_SECRET,
     { expiresIn: "15m" }
   );
@@ -82,7 +87,7 @@ const refresh = asyncHandler(async (req, res) => {
 // @access Public
 const logout = (req, res) => {
   const cookies = req.cookies;
-  if (!cookies?.jwt) return res.sendStatus(204) // No content
+  if (!cookies?.jwt) return res.sendStatus(204).json({ message:"Not cookie found"}) // No content
   res.clearCookie("jwt", { httpOnly: true, sameSite: "None", secure: true });
   res.json({ message: "Cookie cleared - Logged out successfully" });
 };

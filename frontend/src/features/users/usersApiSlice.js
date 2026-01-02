@@ -46,17 +46,15 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         }),
         updateUser: builder.mutation({
             query: initialUserData => ({
-                url: "/users",
+                url: `/users/${initialUserData.id}`,
                 method: "PATCH",
                 body: {
                     ...initialUserData,
                 }
             }),
             invalidatesTags: (result,error,arg) => [
-                {
-                    type: "User",
-                    id:arg.id
-                }
+                {type: "User", id:arg.id },
+                {type: "User", id: "PROFILE"}
             ]
         }),
         deleteUser: builder.mutation({
@@ -73,8 +71,8 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             ]
         }),
         getUserById: builder.query({
-            query: (id) => `/users/${id}`,
-            providesTags: (results,error,id) => [{type:"User",id}]
+            query: () => "/users/profile",
+            providesTags: [{type:"User",id:"PROFILE"}]
         })
     })
 })

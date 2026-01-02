@@ -17,8 +17,11 @@ router
   .post(createNewUser);
 
 router
-  .route("/:id")
+  .route("/profile")
   .get(getUserById)
+
+  router
+  .route("/:id")
   .patch(updateUser)
   .delete(deleteUser);
 

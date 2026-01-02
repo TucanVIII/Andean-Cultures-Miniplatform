@@ -13,17 +13,41 @@ const getAllUsers = asyncHandler( async (req, res) => {
     res.json(users)
 })
 
-// @desc GET one user
-// @route GET /users/:id
+// @desc GET own profile
+// @route GET /users/profile
 // @access Private
 const getUserById = asyncHandler(async (req, res) => {
-    const {id} = req.params
-    const user = await User.findById(id).select("-password").lean().exec()
-    if(!user) {
-        return res.status(404).json({ message:"Not user found"})
+    // Debug info for dev
+    if (process.env.NODE_ENV !== "production") {
+        console.log('[users] getUserById - authHeader:', req.headers?.authorization || req.headers?.Authorization);
+        console.log('[users] getUserById - req.user:', req.user);
     }
-    res.json(user)
-})
+
+    let user = null;
+
+    // If verifyJWT sets req.user as an object with id
+    if (req.user && typeof req.user === 'object' && req.user.id) {
+        user = await User.findById(req.user.id).select('-password').lean().exec();
+    } else if (req.user && typeof req.user === 'string') {
+        // If it's an email (contains @) search by email, otherwise try by id
+        if (req.user.includes && req.user.includes('@')) {
+            user = await User.findOne({ email: req.user }).select('-password').lean().exec();
+        } else {
+            // try treating as ObjectId string
+            try {
+                user = await User.findById(req.user).select('-password').lean().exec();
+            } catch (err) {
+                user = null;
+            }
+        }
+    }
+
+    if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json(user);
+});
 
 // @desc Create new user
 // @route POST /user
@@ -65,8 +89,8 @@ const createNewUser = asyncHandler( async (req , res) => {
 // @access Private
 const updateUser = asyncHandler(async (req, res) =>{ 
     const { id, firstName, lastName, email, password } = req.body
-    if( !id || !firstName || !lastName || !email || !password) {
-        return res.status(400).json({ message:"All fields are required" })
+    if( !id || !firstName || !lastName || !email) {
+        return res.status(400).json({ message:"id, firstName, lastName and email are required" })
     }
 
     const user = await User.findById(id).exec()
@@ -76,12 +100,12 @@ const updateUser = asyncHandler(async (req, res) =>{
 
     const duplicate = await User.findOne({ email }).collation({ locale:"es", strength:2 }).lean().exec()
     if(duplicate && duplicate?._id.toString() !== id){
-        res.status(400).json({ message:"Duplicate email already registered" })
+        return res.status(400).json({ message:"Duplicate email already registered" })
     }
 
     user.firstName = firstName;
     user.lastName = lastName;
-    user.password = password;
+    user.email = email;
 
     if(password) {
         user.password = await bcrypt.hash(password, 10)

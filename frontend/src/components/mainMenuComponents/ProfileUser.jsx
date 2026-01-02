@@ -1,40 +1,105 @@
+import {
+  useGetUserByIdQuery,
+  useUpdateUserMutation,
+} from "../../features/users/usersApiSlice.js";
+import useAuth from "../../hooks/useAuth.js";
+import ErrorMessage from "../../features/ui/ErrorMessage.jsx";
+import SuccessMessage from "../../features/ui/SuccessMessage.jsx";
 import Loader from "../../features/ui/Loader.jsx";
-import { FaRegSave } from "react-icons/fa";
+import { FaRegSave, FaEye, FaEyeSlash, FaTimes } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
 import { CircularProgressbar } from "react-circular-progressbar";
 import QR_code_temp from "../../assets/QR_code_temp.svg";
+import { useState, useEffect } from "react";
 
 import "../../styles/ProfileUser.css";
 
-import { useGetUserByIdQuery } from "../../features/users/usersApiSlice.js";
-
-const ProfileUser = ({ userId }) => {
-
+const ProfileUser = () => {
+  const { userId } = useAuth();
   const {
     data: user,
     isLoading,
     isSuccess,
     isError,
     error,
-  } = useGetUserByIdQuery(userId);
+  } = useGetUserByIdQuery();
+  const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
 
-  let content;
+  const [isEditing, setIsEditing] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [originalData, setOriginalData] = useState(null);
 
-  if (isLoading) {
-    content = <Loader />;
-  }
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-  if (isError) {
-    content = <p className="errmsg">{error?.data?.message}</p>;
-  }
+  useEffect(() => {
+    if (user) {
+      const data = {
+        email: user.email,
+        role: user.role,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        password: "",
+        confirmPassword: "",
+      };
+      setFormData(data);
+      setOriginalData(data);
+    }
+  }, [user]);
 
   const percentage = 50;
 
-  if (isSuccess) {
-    content = (
-      <section className="profile-user__container">
-        <div className="edit-user__container">
-          <div className="edit-user__title">
+  const onSave = async () => {
+    try {
+      await updateUser({
+        id: user._id,
+        email: formData.email,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        password: formData.password || undefined,
+      }).unwrap();
+      setIsEditing(false);
+      setFormData(prev => ({
+      ...prev,
+      password: "",
+      confirmPassword: "",
+    }));
+    } catch (err) {
+      console.error("Error on save: ", err);
+    }
+  };
+
+  const onCancel = () => {
+    setFormData(originalData);
+    setIsEditing(false);
+    setFormData(({
+      ...originalData,
+      password: "",
+      confirmPassword: "",
+    }));
+  };
+
+  const onModify = () => {
+    setOriginalData(formData);
+    setIsEditing(true);
+  };
+
+  const onVisible = () => {
+    setIsVisible((prev) => !prev);
+  };
+
+  if (isLoading) return <Loader />;
+  if (isError) return <ErrorMessage message={error?.data?.message} />;
+
+  return (
+    <section className="profile-user__container">
+      <div className="edit-user__container">
+        <div className="inputs__container">
+          <div>
             <h2 className="edit-user__title">Editar perfil</h2>
           </div>
 
@@ -46,10 +111,12 @@ const ProfileUser = ({ userId }) => {
               name="email"
               id="email"
               className="user__input"
-              value={user.email}
+              value={formData.email}
+              disabled
             />
             <span className="input-border"></span>
           </label>
+
           <label className="roleUser input__style">
             Rol:
             <input
@@ -58,10 +125,12 @@ const ProfileUser = ({ userId }) => {
               name="role"
               id="role"
               className="user__input"
-              value={user.role}
+              value={formData.role}
+              disabled
             />
             <span className="input-border"></span>
           </label>
+
           <label className="nameUser input__style">
             Nombre:
             <input
@@ -70,12 +139,15 @@ const ProfileUser = ({ userId }) => {
               name="nameUser"
               id="nameUser"
               className="user__input"
-              value={user.firstName}
+              value={formData.firstName}
+              onChange={(e) =>
+                setFormData({ ...formData, firstName: e.target.value })
+              }
+              disabled={!isEditing}
             />
             <span className="input-border"></span>
-            <FaPencil className="modify__icon" />
-            <FaRegSave className="save__icon" />
           </label>
+
           <label className="surnameUser input__style">
             Apellidos:
             <input
@@ -84,75 +156,129 @@ const ProfileUser = ({ userId }) => {
               name="lastnameUser"
               id="lastnameUser"
               className="user__input"
-              value={user.lastName}
+              value={formData.lastName}
+              onChange={(e) =>
+                setFormData({ ...formData, lastName: e.target.value })
+              }
+              disabled={!isEditing}
             />
             <span className="input-border"></span>
-            <FaPencil className="modify__icon" />
-            <FaRegSave className="save__icon" />
           </label>
+
           <label className="changePasswordUser input__style">
             Cambiar contraseña:
             <input
               placeholder="Contraseña"
-              type="text"
+              type={isVisible ? "text" : "password"}
               name="password"
               id="password"
               className="user__input"
+              value={formData.password}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
+              disabled={!isEditing}
             />
+            {isEditing && (
+              <button
+                type="button"
+                className="style__button"
+                onClick={onVisible}
+              >
+                {isVisible ? (
+                  <FaEyeSlash className="faIcon__style" />
+                ) : (
+                  <FaEye className="faIcon__style" />
+                )}
+              </button>
+            )}
             <span className="input-border"></span>
-            <FaPencil className="modify__icon" />
           </label>
+
           <label className="confirmChangePasswordUser input__style">
             Repetir contraseña:
             <input
-              placeholder="Confirmar"
-              type="text"
+              placeholder="Confirmar contraseña"
+              type={isVisible ? "text" : "password"}
               name="confirmPassword"
               id="confirmPassword"
               className="user__input"
+              value={formData.confirmPassword}
+              onChange={(e) =>
+                setFormData({ ...formData, confirmPassword: e.target.value })
+              }
+              disabled={!isEditing}
             />
+            {isEditing && (
+              <button
+                type="button"
+                className="style__button"
+                onClick={onVisible}
+              >
+                {isVisible ? (
+                  <FaEyeSlash className="faIcon__style" />
+                ) : (
+                  <FaEye className="faIcon__style" />
+                )}
+              </button>
+            )}
             <span className="input-border"></span>
-            <FaRegSave className="save__icon" />
           </label>
         </div>
 
-        <div className="progress-user__container">
-          <div className="progress-user__title">
-            <h2>Cursos completados</h2>
+        <div className="modify__buttons">
+          {!isEditing ? (
+            <button className="style__button" onClick={onModify}>
+              <FaPencil className="modify__icon" />
+            </button>
+          ) : (
+            <div className="column">
+              <button className="style__button" onClick={onSave}>
+                <FaRegSave className="save__icon" />
+              </button>
+
+              <button className="style__button" onClick={onCancel}>
+                <FaTimes className="faIcon__style" />
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="progress-user__container">
+        <div className="progress-user__title">
+          <h2>Cursos completados</h2>
+        </div>
+        <div className="circleProgress__container">
+          <div className="circle-progressbar__container">
+            <h3 className="progress__title">Caral</h3>
+            <CircularProgressbar value={percentage} text={`${percentage}%`} />
+            <h3 className="note__title">Nota: X</h3>
           </div>
-          <div className="circleProgress__container">
-            <div className="circle-progressbar__container">
-              <h3 className="progress__title">Caral</h3>
-              <CircularProgressbar value={percentage} text={`${percentage}%`} />
-              <h3 className="note__title">Nota: X</h3>
-            </div>
-            <div className="circle-progressbar__container">
-              <h3 className="progress__title">Wari</h3>
-              <CircularProgressbar value={percentage} text={`${percentage}%`} />
-              <h3 className="note__title">Nota: X</h3>
-            </div>
-            <div className="circle-progressbar__container">
-              <h3 className="progress__title">Tiawanaku</h3>
-              <CircularProgressbar value={percentage} text={`${percentage}%`} />
-              <h3 className="note__title">Nota: X</h3>
-            </div>
-            <div className="circle-progressbar__container">
-              <h3 className="progress__title">Inca</h3>
-              <CircularProgressbar value={percentage} text={`${percentage}%`} />
-              <h3 className="note__title">Nota: X</h3>
-            </div>
+          <div className="circle-progressbar__container">
+            <h3 className="progress__title">Wari</h3>
+            <CircularProgressbar value={percentage} text={`${percentage}%`} />
+            <h3 className="note__title">Nota: X</h3>
+          </div>
+          <div className="circle-progressbar__container">
+            <h3 className="progress__title">Tiawanaku</h3>
+            <CircularProgressbar value={percentage} text={`${percentage}%`} />
+            <h3 className="note__title">Nota: X</h3>
+          </div>
+          <div className="circle-progressbar__container">
+            <h3 className="progress__title">Inca</h3>
+            <CircularProgressbar value={percentage} text={`${percentage}%`} />
+            <h3 className="note__title">Nota: X</h3>
           </div>
         </div>
+      </div>
 
-        <div className="certificate-user__container">
-          <h3 className="certificate__title">Certificado:</h3>
-          <img src={QR_code_temp} alt="" />
-        </div>
-      </section>
-    );
-  }
-
-  return content;
+      <div className="certificate-user__container">
+        <h3 className="certificate__title">Certificado:</h3>
+        <img src={QR_code_temp} alt="" />
+      </div>
+    </section>
+  );
 };
 
 export default ProfileUser;

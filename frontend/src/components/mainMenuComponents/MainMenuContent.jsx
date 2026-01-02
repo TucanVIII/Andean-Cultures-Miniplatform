@@ -1,12 +1,17 @@
+import { useGetUserByIdQuery } from "../../features/users/usersApiSlice.js";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 import "../../styles/userMainMenu.css";
 
 const MainMenuContent = () => {
+  const { userId } = useAuth();
+  const { data: user,isLoading } = useGetUserByIdQuery(userId);
+ 
   const content = (
     <div className="menu-body__container">
       <div className="title-menu__container">
-        <h1 className="title-menu">¡Te damos la bienvenida, USER!</h1>
+        <h1 className="title-menu">¡Te damos la bienvenida, {user?.firstName}!</h1>
       </div>
 
       <div className="start-button__container">

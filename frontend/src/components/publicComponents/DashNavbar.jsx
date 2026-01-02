@@ -10,7 +10,7 @@ const DashNavbar = () => {
 
   const navigate = useNavigate();
 
-  const handleMenuClick = () => {
+  const handleSupportClick = () => {
     navigate("/menu");
   };
 
@@ -37,13 +37,13 @@ const DashNavbar = () => {
           <a href={`#${target_section}`} onClick={handleScroll}>
             Saber más
           </a>
-          <a onClick={handleMenuClick}>Soporte</a>
+          <a>Soporte</a>{/*onClick={handleMenuClick}*/}
           <DarkModeSwitch />
         </div>
 
         <Link to="login">
-          <div class="button-borders">
-            <button class="primary-button">LOGIN</button>
+          <div className="button-borders">
+            <button className="primary-button">LOGIN</button>
           </div>
         </Link>
       </div>

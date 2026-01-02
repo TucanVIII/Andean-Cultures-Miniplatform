@@ -7,17 +7,38 @@
 
 /* edit-user__container */
 .edit-user__container {
-  display: grid;
-  flex-direction: column;
-  text-align: center;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
   width: 90%;
   margin: 20px;
   gap: 15px;
 }
 
+.inputs__container {
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  gap: 20px;
+}
+
+.modify__buttons {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 10%;
+}
+
+.column {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
 .edit-user__title {
-  grid-column: span 2;
+  grid-column: 1/-1;
   justify-self: center;
   color: var(--color-text-I);
   .dark & {
@@ -26,12 +47,16 @@
 }
 
 .emailUser {
-  grid-column: span 2;
+  grid-column: 1/-1;
   text-align: left;
   color: var(--color-text-II);
   .dark & {
     color: var(--color-text-VI);
   }
+}
+
+.rolUser {
+  grid-column: 1/-1;
 }
 
 .nameUser {
@@ -96,60 +121,60 @@
   color: var(--color-primary-700);
 }
 
-.user__input{
+.user__input {
   background: transparent;
 }
 
 .input__style {
- --width-of-input: 400px;
- --border-height: 1px;
- --border-before-color: rgba(221, 221, 221, 0.39);
- --border-after-color: #20536a;
- --input-hovered-color: #4985e01f;
- position: relative;
- width: var(--width-of-input);
+  --width-of-input: 400px;
+  --border-height: 1px;
+  --border-before-color: rgba(221, 221, 221, 0.39);
+  --border-after-color: #20536a;
+  --input-hovered-color: #4985e01f;
+  position: relative;
+  width: var(--width-of-input);
 }
 
 /* styling the Input */
 .user__input {
- color:var(--color-text-II);
- font-size: 0.95rem;
- background-color: transparent;
- width: 100%;
- box-sizing: border-box;
- padding-inline: 0.5em;
- padding-block: 0.7em;
- border: none;
- border-bottom: var(--border-height) solid var(--color-text-II);
- .dark & {
-    color:var(--color-text-VI);
+  color: var(--color-text-II);
+  font-size: 0.95rem;
+  background-color: transparent;
+  width: 100%;
+  box-sizing: border-box;
+  padding-inline: 0.5em;
+  padding-block: 0.7em;
+  border: none;
+  border-bottom: var(--border-height) solid var(--color-text-II);
+  .dark & {
+    color: var(--color-text-VI);
     border-bottom: var(--border-height) solid var(--color-text-VI);
   }
 }
 /* styling of animated border */
 .input-border {
- position: absolute;
- background: var(--color-primary-900);
- width: 0%;
- height: 2px;
- bottom: 0;
- left: 0;
- transition: 0.3s;
- .dark & {
-  background: var(--color-text-VI);
+  position: absolute;
+  background: var(--color-primary-900);
+  width: 0%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  transition: 0.3s;
+  .dark & {
+    background: var(--color-text-VI);
   }
 }
 /* Hover on Input */
 input:hover {
- background: var(--input-hovered-color);
+  background: var(--input-hovered-color);
 }
 
 input:focus {
- outline: none;
+  outline: none;
 }
 
 input:focus ~ .input-border {
- width: 100%;
+  width: 100%;
 }
 
 /* progress-user__container */

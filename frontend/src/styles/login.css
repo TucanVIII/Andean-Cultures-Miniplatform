@@ -16,6 +16,10 @@
     border-radius: 20px;
 }
 
+.login-menu .title{
+  color: var(--color-text-II);
+}
+
 /* Inputs form */
 /* From Uiverse.io by AbanoubMagdy1 */ 
 .wave-group {
@@ -31,13 +35,14 @@
 }
 
 .wave-group .input {
-  font-size: 16px;
+  font-size: 1rem;
   padding: 10px 10px 10px 5px;
   display: block;
   width: 200px;
   border: none;
   border-bottom: 1px solid var(--color-text-I);
   background: transparent;
+ color: var(--color-text-I);
 }
 
 .wave-group .input:focus {
@@ -148,4 +153,26 @@
 .login:hover .hover-underline-animation:after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+
+.buttons__container{
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.login.backHome svg {
+  transform: translateX(8px) scaleX(-1);
+}
+
+.login.backHome:hover svg {
+  transform: translateX(0) scaleX(-1);
+}
+
+.login.backHome .hover-underline-animation:after {
+  transform-origin: bottom left;
+}
+
+.login.backHome:hover .hover-underline-animation:after {
+  transform-origin: bottom right;
 }
