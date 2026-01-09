@@ -1,7 +1,6 @@
 import ReactPlayer from "react-player";
-import { useState,useEffect,useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useUpdateSectionProgressMutation } from "../../features/progress/progressApiSlice.js";
-import { ToastContainer } from "react-toastify";
 import { notify } from "../ui/notify.js";
 
 import "../../styles/videoSection.css";
@@ -11,19 +10,18 @@ const VideoSection = ({ sectionId, videoUrl }) => {
   const [updateProgress] = useUpdateSectionProgressMutation();
 
   const handleVideoCompletion = async () => {
+    if (hasReported.current) return;
+    hasReported.current = true;
     try {
       await updateProgress({ sectionId, isVideo: true }).unwrap();
-      notify.success("Video completado!")
-      console.log("Progreso de video guardado");
+      notify.success("Video completado!");
     } catch (err) {
       console.error("Error al guardar progreso", err);
-      notify.error("Fallo al reproducir el video!")
+      notify.error("Fallo al reproducir el video!");
     }
   };
 
-  useEffect(() => {
-    
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -36,7 +34,6 @@ const VideoSection = ({ sectionId, videoUrl }) => {
           height="100%"
         />
       </div>
-      <ToastContainer />
     </>
   );
 };

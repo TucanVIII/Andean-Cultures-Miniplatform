@@ -13,14 +13,14 @@
 }
 
 /* video__container */
-.video__container{
+.video__container {
   color: var(--color-text-I);
   .dark & {
     color: var(--color-text-VII);
   }
 }
 
-.video__container video{
+.video__container video {
   width: 100%;
 }
 
@@ -252,6 +252,44 @@
 
 .art__img {
   width: 90px;
+}
+
+/* MARCADOR DE FINAL DE LECTURA */
+.text-completed__container {
+  height: 20px;
+  margin: 40px 0;
+  border-top: 4px solid var(--color-background-dark);
+  position: relative;
+  color: var(--color-text-VI);
+  .dark & {
+    border-top: 4px solid var(--color-background);
+    color: var(--color-text-II);
+  }
+}
+
+.text-completed__container span{
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-background-dark);
+  padding: 0 10px;
+  font-size: 1rem;
+  .dark & {
+    color: var(--color-text-II);
+    background: var(--color-background);
+  }
+}
+
+.text-completed__div {
+  padding: 15px;
+  background: #d4edda;
+  color: #155724;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+  border: 1px solid #c3e6cb;
 }
 
 /* questions-container */

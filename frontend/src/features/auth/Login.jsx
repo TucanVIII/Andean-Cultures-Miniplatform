@@ -6,7 +6,6 @@ import { useLoginMutation } from "./authApiSlice.js";
 import usePersist from "../../hooks/usePersist.js";
 
 import Loader from "../ui/Loader.jsx";
-import ErrorMessage from "../ui/ErrorMessage.jsx";
 import { FcGoogle } from "react-icons/fc";
 import "../../styles/login.css";
 
@@ -63,7 +62,6 @@ const Login = () => {
       <div className="login-menu">
         <h1 className="title">LOGIN</h1>
         <form action="" className="form-container" onSubmit={handleSubmit}>
-          {errMsg && <ErrorMessage message={errMsg} />}
           <div className="wave-group">
             <input
               type="text"

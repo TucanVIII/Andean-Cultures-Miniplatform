@@ -3,8 +3,6 @@ import {
   useUpdateUserMutation,
 } from "../../features/users/usersApiSlice.js";
 import useAuth from "../../hooks/useAuth.js";
-import ErrorMessage from "../../features/ui/ErrorMessage.jsx";
-import SuccessMessage from "../../features/ui/SuccessMessage.jsx";
 import Loader from "../../features/ui/Loader.jsx";
 import { FaRegSave, FaEye, FaEyeSlash, FaTimes } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
@@ -94,7 +92,6 @@ const ProfileUser = () => {
   };
 
   if (isLoading) return <Loader />;
-  if (isError) return <ErrorMessage message={error?.data?.message} />;
 
   return (
     <section className="profile-user__container">

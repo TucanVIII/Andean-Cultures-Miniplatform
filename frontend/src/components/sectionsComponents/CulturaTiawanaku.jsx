@@ -1,4 +1,7 @@
 import { useGetAllSectionsQuery } from "../../features/sections/sectionsApiSlice.js";
+import { useScrollCompletion } from "../../hooks/useScrollCompletion.js";
+import { useSectionTextProgress } from "../../hooks/useSectionTextProgress.js";
+
 import VideoSection from "../../features/sections/VideoSection.jsx";
 import QuestionsTest from "../../features/questions/QuestionsTest.jsx";
 
@@ -8,11 +11,20 @@ import placeholderJPG from "../../assets/react.svg";
 import CronologiaTiawanaku from "../../assets/CronologiaTiawanaku.png";
 
 const CulturaCaral = ({ sectionId }) => {
-  const { data: sections } = useGetAllSectionsQuery();
+  const { ref: textWasCompleted, completed: finishedText } =
+    useScrollCompletion({ threshold: 1 });
 
+  const { data: sections } = useGetAllSectionsQuery();
   const section = sections?.entities?.[sectionId];
 
   if (!section) return null;
+
+  useSectionTextProgress({
+    section,
+    sectionId,
+    finishedText,
+  });
+
   return (
     <section className="main-culture__container">
       <div className="main-title__container">
@@ -250,6 +262,18 @@ const CulturaCaral = ({ sectionId }) => {
         </div>
         <img className="art__img" src={placeholderJPG} alt="" />
       </div>
+
+      {/* MARCADOR DE FINAL DE LECTURA */}
+      <div className="text-completed__container" ref={textWasCompleted}>
+        <span className="text-completed__span"> Final de la lectura </span>
+      </div>
+
+      {/* FEEDBACK VISUAL */}
+      {finishedText && (
+        <div className="text-completed__div">
+          ✓ Has completado la lectura del contenido teórico.
+        </div>
+      )}
 
       <div className="questions-container">
         <QuestionsTest sectionId={sectionId} />

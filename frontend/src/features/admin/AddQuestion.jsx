@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-import SuccessMessage from "../ui/SuccessMessage.jsx";
-import ErrorMessage from "../ui/ErrorMessage.jsx";
 import { useAddNewQuestionMutation } from "../questions/questionsApiSlice.js";
 
 import { FaTimes, FaRegSave } from "react-icons/fa";
@@ -127,9 +125,7 @@ const AddQuestion = ({ sectionId, onClose }) => {
           </div>
         </div>
       </div>
-      {success && <SuccessMessage message="Ingreso de pregunta exitoso" />}
 
-      {apiError && <ErrorMessage message={apiError} />}
     </section>
   );
 };
