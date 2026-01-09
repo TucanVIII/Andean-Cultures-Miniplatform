@@ -6,7 +6,7 @@ CARACTERÍSTICAS DEL LOGIN
 -[] Permitir crear un usuario por medio de la cuenta de google
 
 CARACTERÍSTICAS DEL USUARIO AL INGRESAR EN LA APLICACIÓN
--[] cada estudiante puede acceder a los contenidos de las  secciones y sus correspondientes perfiles
+-[X] cada estudiante puede acceder a los contenidos de las  secciones y sus correspondientes perfiles
 -[] en los perfiles se puede ver el progreso de cada sección con las notas correspondientes y al final debe tener un qr para el certificado al finalizar
 
 CARACTERÍSTICAS DE LAS SECCIONES
@@ -20,5 +20,5 @@ TAREAS DE ADMINISTRADOR
 -[X] Añadir un panel CRUD para las preguntas en el panel de administración
 -[X] Cada vez que se quiera modificar una pregunta debe ser activada por medio de un botón que permita modificar, al permitir modificar aparece un botón para guardar la información
 -[] los administradores pueden aumentar información dentro de las secciones
--[X] El panel de administración de las preguntas debe estar conectado a la base de datos para que renderize las preguntas
+-[X] El panel de administración de las preguntas debe estar conectado a la base de datos para renderizar las preguntas
 -[] 

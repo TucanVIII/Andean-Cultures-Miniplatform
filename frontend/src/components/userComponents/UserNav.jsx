@@ -4,7 +4,7 @@ import { FaUser, FaPlayCircle, FaHome } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
 import DarkModeSwitch from "../../features/ui/DarkModeSwitch.jsx";
 import { useEffect } from "react";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useGetUserByIdQuery } from "../../features/users/usersApiSlice.js";
 import useAuth from "../../hooks/useAuth.js";
 import "../../styles/userNav.css";
