@@ -51,8 +51,8 @@ const TableUserProgress = () => {
         <tbody className="table__tbody">
           {
             user.sections.map(section =>  
-            <tr key={section.sectionId.$oid}>
-              <td>{section.sectionName}</td>
+            <tr key={section.sectionId}>
+              <td>{section.sectionTitle}</td>
               <td>{section.theoryCompleted ? <FaCheck className="faIcon__style-check"/> : <FaTimes className="faIcon__style-cross"/>}</td>
               <td>{section.videoCompleted ? <FaCheck className="faIcon__style-check"/> : <FaTimes className="faIcon__style-cross"/>}</td>
               <td>{section.quiz.status}</td>

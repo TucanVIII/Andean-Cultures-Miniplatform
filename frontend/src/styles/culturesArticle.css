@@ -20,6 +20,10 @@
   }
 }
 
+.video__container video{
+  width: 100%;
+}
+
 .title-container {
   display: flex;
   justify-content: center;

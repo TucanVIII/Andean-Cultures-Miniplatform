@@ -1,4 +1,5 @@
-import User from "../models/UserModel.js"
+import User from "../models/UserModel.js";
+import Section from "../models/SectionModel.js";
 import asyncHandler from "express-async-handler";
 import bcrypt from "bcrypt";
 
@@ -53,35 +54,39 @@ const getUserById = asyncHandler(async (req, res) => {
 // @route POST /user
 // @access Private
 const createNewUser = asyncHandler( async (req , res) => {
-    const { firstName, lastName, email, password, sections, role } = req.body
-    if(!firstName || !lastName || !email || !password || !sections || !role) {
+    const { firstName, lastName, email, password, role } = req.body
+    if(!firstName || !lastName || !email || !password || !role) {
         return res.status(400).json({ message:"All fields are required"})
     }
 
-    const duplicate = await User.findOne({ email }).collation({ locale:"es", strength:2 }).lean().exec()
+    const duplicate = await User.findOne({ email }).lean();
     if(duplicate) {
         return res.status(409).json({ message:"Duplicate email user already registered" })
     }
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
-    const userObject = {
-        firstName,
-        lastName,
-        email,
-        role: role,
-        password: hashedPassword,
-        sections: sections,
-        certificate: {}
-    }
+    const sections = await Section.find().lean();
+    const sectionsProgress = sections.map(section => ({
+        sectionId: section._id,
+        sectionTitle: section.sectionTitle,
+        progress: "pending",
+        theoryCompleted: false,
+        videoCompleted: false,
+        quiz: { status: "pending" }
+    }))
 
     // Create and store new user
-    const newUser = await User.create(userObject);
-    if(newUser) {
-        res.status(201).json({ message:`User created ${userObject.email}`})
-    } else {
-        res.status(400).json({ message:"Invalid user data received"})
-    }
+    const user = await User.create({
+      firstName,
+      lastName,
+      email,
+      password: hashedPassword,
+      roles: [role],
+      sections: sectionsProgress
+    });
+
+    res.status(201).json({ message: `User created by admin: ${user.email}` });   
 })
 
 // @desc Update a user

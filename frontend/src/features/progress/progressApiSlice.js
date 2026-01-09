@@ -1,4 +1,4 @@
-import { apiSlice } from "../../app/api/apiSlice";
+import { apiSlice } from "../../app/api/apiSlice.js";
 
 export const progressApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -12,13 +12,11 @@ export const progressApiSlice = apiSlice.injectEndpoints({
         },
       }),
       invalidatesTags: (result, error, arg) => [
-        {
-          type: "Section",
-          id: arg.sectionId,
-        },
+        { type: "Section", id: arg.sectionId },
+        { type: "User", id:"PROFILE"}
       ],
     }),
   }),
 });
 
-export const { useUpdateSectionProgressMutation } = sectionsApiSlice;
+export const { useUpdateSectionProgressMutation } = progressApiSlice;

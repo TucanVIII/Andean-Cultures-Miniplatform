@@ -1,3 +1,5 @@
+import { useGetAllSectionsQuery } from "../../features/sections/sectionsApiSlice.js";
+import VideoSection from "../../features/sections/VideoSection.jsx";
 import QuestionsTest from "../../features/questions/QuestionsTest.jsx";
 
 import "../../styles/culturesArticle.css";
@@ -6,10 +8,20 @@ import placeholderJPG from "../../assets/react.svg";
 import CronologiaInca from "../../assets/CronologiaInca.png";
 
 const CulturaCaral = ({ sectionId }) => {
-  const content = (
+  const { data: sections } = useGetAllSectionsQuery();
+
+  const section = sections?.entities?.[sectionId];
+
+  if (!section) return null;
+  return (
     <section className="main-culture__container">
       <div className="main-title__container">
         <h1>Cultura Inca</h1>
+      </div>
+
+      <div className="video__container">
+        <h2 id="video-inca">Video</h2>
+        <VideoSection sectionId={sectionId} videoUrl={section.videoUrl} />
       </div>
 
       <div className="background__container">
@@ -189,32 +201,32 @@ const CulturaCaral = ({ sectionId }) => {
             jerarquía social Huno.- Señor gobernante del valle y conductor del
             gobierno del Estado.
           </p>
-            <ul className="ul-culture__list">
-              <li>
-                <b>Curacas.-</b> Autoridad de actividades administrativas,
-                agrarias, económicas, constructivas y religiosas de las
-                pachacas. Este es el nivel donde se encontraban los
-                intelectuales o científicos y sacerdotes
-              </li>
-              <li>
-                <b>Icho Huari, Allauca Huari.-</b> Primera persona y segunda
-                autoridad en las pachacas y sayas.
-              </li>
-              <li>
-                <b>Pachacas.-</b> Centro urbano conducido por una autoridad
-                (Curaca). Pueblo, agricultores, pescadores, artesanos,
-                constructores, sirvientes miembros de un ayllu y sayas.
-              </li>
-              <li>
-                {" "}
-                <b>Ayllu.-</b> Grupos familiares pertenecientes a una pachaca.
-              </li>
-              <li>
-                <b>Sayas.-</b> Porción del pueblo asentados al margen del río
-                tanto al lado izquierdo y derecho dirigidos por un Icho Huari o
-                Allauca Huari.
-              </li>
-            </ul>
+          <ul className="ul-culture__list">
+            <li>
+              <b>Curacas.-</b> Autoridad de actividades administrativas,
+              agrarias, económicas, constructivas y religiosas de las pachacas.
+              Este es el nivel donde se encontraban los intelectuales o
+              científicos y sacerdotes
+            </li>
+            <li>
+              <b>Icho Huari, Allauca Huari.-</b> Primera persona y segunda
+              autoridad en las pachacas y sayas.
+            </li>
+            <li>
+              <b>Pachacas.-</b> Centro urbano conducido por una autoridad
+              (Curaca). Pueblo, agricultores, pescadores, artesanos,
+              constructores, sirvientes miembros de un ayllu y sayas.
+            </li>
+            <li>
+              {" "}
+              <b>Ayllu.-</b> Grupos familiares pertenecientes a una pachaca.
+            </li>
+            <li>
+              <b>Sayas.-</b> Porción del pueblo asentados al margen del río
+              tanto al lado izquierdo y derecho dirigidos por un Icho Huari o
+              Allauca Huari.
+            </li>
+          </ul>
         </div>
 
         <img className="organization__img" src={placeholderJPG} alt="" />
@@ -300,18 +312,11 @@ const CulturaCaral = ({ sectionId }) => {
         <img className="art__img" src={placeholderJPG} alt="" />
       </div>
 
-      <div className="video__container">
-        <h2 id="video-inca">Video</h2>
-        <img src={placeholderJPG} alt="" />
-      </div>
-
       <div className="questions-container">
-        <QuestionsTest sectionId={sectionId}/>
+        <QuestionsTest sectionId={sectionId} />
       </div>
     </section>
   );
-
-  return content;
 };
 
 export default CulturaCaral;

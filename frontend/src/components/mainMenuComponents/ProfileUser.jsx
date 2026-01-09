@@ -30,6 +30,8 @@ const ProfileUser = () => {
   const [originalData, setOriginalData] = useState(null);
 
   const [formData, setFormData] = useState({
+    email: "",
+    role: "",
     firstName: "",
     lastName: "",
     password: "",
@@ -74,7 +76,6 @@ const ProfileUser = () => {
   };
 
   const onCancel = () => {
-    setFormData(originalData);
     setIsEditing(false);
     setFormData(({
       ...originalData,

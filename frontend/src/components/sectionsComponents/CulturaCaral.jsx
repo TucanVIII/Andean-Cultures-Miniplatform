@@ -1,19 +1,34 @@
+import { useGetAllSectionsQuery } from "../../features/sections/sectionsApiSlice.js";
+import VideoSection from "../../features/sections/VideoSection.jsx";
 import QuestionsTest from "../../features/questions/QuestionsTest.jsx";
 
 import "../../styles/culturesArticle.css";
 
 import placeholderJPG from "../../assets/react.svg";
-import CronologiaCaral from "../../assets/CronologiaCaral.png"
+import CronologiaCaral from "../../assets/CronologiaCaral.png";
 
 const CulturaCaral = ({ sectionId }) => {
-  const content = (
+  const { data: sections } = useGetAllSectionsQuery();
+
+  const section = sections?.entities?.[sectionId];
+
+  if (!section) return null;
+  
+  return (
     <section className="main-culture__container">
       <div className="main-title__container">
         <h1>Cultura Caral</h1>
       </div>
 
+      <div className="video__container">
+        <h2 id="video-caral">Video</h2>
+        <VideoSection className="iframe__video" sectionId={section._id} videoUrl={section.videoUrl} />
+      </div>
+
       <div className="background__container">
-        <h2 className="background__title" id="antecedentes-caral">Antecedentes</h2>
+        <h2 className="background__title" id="antecedentes-caral">
+          Antecedentes
+        </h2>
         <p className="background__description">
           La civilización Caral es considerada como una de las civilizaciones
           más antiguas de Sudamérica, cuya capital es la ciudad del mismo
@@ -26,7 +41,9 @@ const CulturaCaral = ({ sectionId }) => {
       </div>
 
       <div className="geographical-location__container">
-        <h2 className="geographical-location__title" id="ubicacion-caral">Ubicación geográfica</h2>
+        <h2 className="geographical-location__title" id="ubicacion-caral">
+          Ubicación geográfica
+        </h2>
         <div className="geographical-location__subcontainer">
           <p className="geographical-location__description">
             La región de Norte Chico, en la costa central de Perú, incluye los
@@ -45,7 +62,9 @@ const CulturaCaral = ({ sectionId }) => {
       </div>
 
       <div className="history__container">
-        <h2 className="history-title" id="historia-caral">Historia</h2>
+        <h2 className="history-title" id="historia-caral">
+          Historia
+        </h2>
         <p className="history-description">
           Las distintas pruebas científicas de varios objetos hallados
           determinan que Caral es la ciudad más antigua de América, con cerca a
@@ -69,14 +88,16 @@ const CulturaCaral = ({ sectionId }) => {
           </li>
         </ul>
         <img
-            className="chronology__img"
-            src={CronologiaCaral}
-            alt="CronologiaCaral"
-          />
+          className="chronology__img"
+          src={CronologiaCaral}
+          alt="CronologiaCaral"
+        />
       </div>
 
       <div className="organization__container">
-        <h2 className="organization__title" id="organizacion-caral">Organización</h2>
+        <h2 className="organization__title" id="organizacion-caral">
+          Organización
+        </h2>
 
         <div className="social-organization__container">
           <h3 className="social-organization__subtitle">Organización social</h3>
@@ -124,32 +145,32 @@ const CulturaCaral = ({ sectionId }) => {
             jerarquía social Huno.- Señor gobernante del valle y conductor del
             gobierno del Estado.
           </p>
-            <ul className="ul-culture__list">
-              <li>
-                <b>Curacas.-</b> Autoridad de actividades administrativas,
-                agrarias, económicas, constructivas y religiosas de las
-                pachacas. Este es el nivel donde se encontraban los
-                intelectuales o científicos y sacerdotes
-              </li>
-              <li>
-                <b>Icho Huari, Allauca Huari.-</b> Primera persona y segunda
-                autoridad en las pachacas y sayas.
-              </li>
-              <li>
-                <b>Pachacas.-</b> Centro urbano conducido por una autoridad
-                (Curaca). Pueblo, agricultores, pescadores, artesanos,
-                constructores, sirvientes miembros de un ayllu y sayas.
-              </li>
-              <li>
-                {" "}
-                <b>Ayllu.-</b> Grupos familiares pertenecientes a una pachaca.
-              </li>
-              <li>
-                <b>Sayas.-</b> Porción del pueblo asentados al margen del río
-                tanto al lado izquierdo y derecho dirigidos por un Icho Huari o
-                Allauca Huari.
-              </li>
-            </ul>
+          <ul className="ul-culture__list">
+            <li>
+              <b>Curacas.-</b> Autoridad de actividades administrativas,
+              agrarias, económicas, constructivas y religiosas de las pachacas.
+              Este es el nivel donde se encontraban los intelectuales o
+              científicos y sacerdotes
+            </li>
+            <li>
+              <b>Icho Huari, Allauca Huari.-</b> Primera persona y segunda
+              autoridad en las pachacas y sayas.
+            </li>
+            <li>
+              <b>Pachacas.-</b> Centro urbano conducido por una autoridad
+              (Curaca). Pueblo, agricultores, pescadores, artesanos,
+              constructores, sirvientes miembros de un ayllu y sayas.
+            </li>
+            <li>
+              {" "}
+              <b>Ayllu.-</b> Grupos familiares pertenecientes a una pachaca.
+            </li>
+            <li>
+              <b>Sayas.-</b> Porción del pueblo asentados al margen del río
+              tanto al lado izquierdo y derecho dirigidos por un Icho Huari o
+              Allauca Huari.
+            </li>
+          </ul>
         </div>
 
         <img className="organization__img" src={placeholderJPG} alt="" />
@@ -157,7 +178,9 @@ const CulturaCaral = ({ sectionId }) => {
 
       <div className="cultural-achievements__container">
         <div className="cultural-achievements__subcontainer">
-          <h2 className="cultural-achievements__title" id="logros-caral">Logros Culturales</h2>
+          <h2 className="cultural-achievements__title" id="logros-caral">
+            Logros Culturales
+          </h2>
           <p className="cultural-achievements__description">
             Su riqueza y prestigio prevalecieron en el área nor central por casi
             un milenio y fomentaron cambios sociales cualitativos en las
@@ -191,7 +214,9 @@ const CulturaCaral = ({ sectionId }) => {
 
       <div className="beliefs__container">
         <div className="beliefs__subcontainer">
-          <h2 className="beliefs__title" id="creencias-caral">Creencias</h2>
+          <h2 className="beliefs__title" id="creencias-caral">
+            Creencias
+          </h2>
           <p className="beliefs__description">
             A la ausencia de un cuerpo militar que domine y controle el pueblo,
             los Caral lograron insertar la religión como un mecanismo de control
@@ -209,7 +234,9 @@ const CulturaCaral = ({ sectionId }) => {
 
       <div className="art__container">
         <div className="art__subcontainer">
-          <h2 className="art__title" id="arte-caral">Arte</h2>
+          <h2 className="art__title" id="arte-caral">
+            Arte
+          </h2>
           <p className="art__description">
             Caral evidencia la realización de concentraciones humanas periódicas
             donde se combinaban los traba-jos colectivos en las construcciones,
@@ -227,18 +254,11 @@ const CulturaCaral = ({ sectionId }) => {
         <img className="art__img" src={placeholderJPG} alt="" />
       </div>
 
-      <div className="video__container">
-        <h2 id="video-caral">Video</h2>
-        <img src={placeholderJPG} alt="" />
-      </div>
-
       <div className="questions-container">
         <QuestionsTest sectionId={sectionId} />
       </div>
     </section>
   );
-
-  return content;
 };
 
 export default CulturaCaral;

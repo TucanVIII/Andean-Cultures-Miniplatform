@@ -1,3 +1,5 @@
+import { useGetAllSectionsQuery } from "../../features/sections/sectionsApiSlice.js";
+import VideoSection from "../../features/sections/VideoSection.jsx";
 import QuestionsTest from "../../features/questions/QuestionsTest.jsx";
 
 import "../../styles/culturesArticle.css";
@@ -6,10 +8,20 @@ import placeholderJPG from "../../assets/react.svg";
 import CronologiaWari from "../../assets/CronologiaWari.png";
 
 const CulturaCaral = ({ sectionId }) => {
-  const content = (
+  const { data: sections } = useGetAllSectionsQuery();
+
+  const section = sections?.entities?.[sectionId];
+
+  if (!section) return null;
+  return (
     <section className="main-culture__container">
       <div className="main-title__container">
         <h1>Cultura Wari</h1>
+      </div>
+
+      <div className="video__container">
+        <h2 id="video-wari">Video</h2>
+        <VideoSection sectionId={sectionId} videoUrl={section.videoUrl} />
       </div>
 
       <div className="background__container">
@@ -210,18 +222,11 @@ const CulturaCaral = ({ sectionId }) => {
         <img className="art__img" src={placeholderJPG} alt="" />
       </div>
 
-      <div className="video__container">
-        <h2 id="video-wari">Video</h2>
-        <img src={placeholderJPG} alt="" />
-      </div>
-
       <div className="questions-container">
-        <QuestionsTest sectionId={sectionId}/>
+        <QuestionsTest sectionId={sectionId} />
       </div>
     </section>
   );
-
-  return content;
 };
 
 export default CulturaCaral;

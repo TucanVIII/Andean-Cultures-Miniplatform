@@ -1,7 +1,54 @@
 import User from "../models/UserModel.js";
+import Section from "../models/SectionModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import asyncHandler from "express-async-handler";
+
+// @desc Signup
+// @route POST /auth/signup
+// @access Public
+const signup = asyncHandler(async(req,res) => {
+  const { email,firstName,lastName,password } = req.body;
+  if(!email || !firstName || !lastName || !password) {
+    return res.status(400).json({ message:"All fields are required" });
+  }
+
+  const duplicate = await User.findOne({ email }).lean();
+  if(duplicate) {
+    return res.status(409).json({ message:"Duplicate email user already registered" })
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+  
+  const sections = await Section.find().lean();
+
+  const sectionsProgress = sections.map(section => ({
+    sectionId: section._id,
+    sectionTitle: section.sectionTitle,
+    order: section.order,
+    progress: "pending",
+    theoryCompleted: false,
+    videoCompleted: false,
+    quiz: {
+      status: "pending",
+      grade: 0,
+      totalQuestions: 4,
+      completionDate: null,
+      userAnswers: []
+  }
+  }))
+
+  const user = await User.create({
+    firstName,
+    lastName,
+    email,
+    password: hashedPassword,
+    roles: ["User"],
+    sections: sectionsProgress,
+  });
+
+  res.status(201).json({ message: `User registered successfully: ${user.email}` });
+})
 
 // @desc Login
 // @route POST /auth
@@ -92,4 +139,4 @@ const logout = (req, res) => {
   res.json({ message: "Cookie cleared - Logged out successfully" });
 };
 
-export { login, refresh, logout };
+export { signup,login, refresh, logout };

@@ -1,7 +1,8 @@
 # REQUISITOS A CUMPLIR EN LA APLICACIÓN
 
 CARACTERÍSTICAS DEL LOGIN
--[] un método de autenticación personal para cada usuario
+-[] Añadir un signup en la aplicación con verificación de dos pasos
+-[X] un método de autenticación personal para cada usuario
 -[] Permitir crear un usuario por medio de la cuenta de google
 
 CARACTERÍSTICAS DEL USUARIO AL INGRESAR EN LA APLICACIÓN
