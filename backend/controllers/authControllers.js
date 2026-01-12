@@ -43,7 +43,7 @@ const signup = asyncHandler(async(req,res) => {
     lastName,
     email,
     password: hashedPassword,
-    roles: ["User"],
+    roles: ["Student"],
     sections: sectionsProgress,
   });
 

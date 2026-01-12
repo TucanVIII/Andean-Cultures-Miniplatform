@@ -200,10 +200,12 @@ input:focus ~ .input-border {
 
 .circle-progressbar__container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   text-align: center;
+  gap: 40px;
+  flex-wrap: wrap;
 }
 
 .progress__title {

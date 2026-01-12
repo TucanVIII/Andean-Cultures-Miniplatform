@@ -1,14 +1,17 @@
+import { useState, useEffect } from "react";
 import {
   useGetUserByIdQuery,
   useUpdateUserMutation,
 } from "../../features/users/usersApiSlice.js";
 import useAuth from "../../hooks/useAuth.js";
+import calcSectionProgress from "../../utils/calcSectionProgress.js";
+
+import UserProgressCircle from "../userComponents/UserProgressCircle.jsx";
 import Loader from "../../features/ui/Loader.jsx";
 import { FaRegSave, FaEye, FaEyeSlash, FaTimes } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
-import { CircularProgressbar } from "react-circular-progressbar";
+
 import QR_code_temp from "../../assets/QR_code_temp.svg";
-import { useState, useEffect } from "react";
 
 import "../../styles/ProfileUser.css";
 
@@ -63,11 +66,11 @@ const ProfileUser = () => {
         password: formData.password || undefined,
       }).unwrap();
       setIsEditing(false);
-      setFormData(prev => ({
-      ...prev,
-      password: "",
-      confirmPassword: "",
-    }));
+      setFormData((prev) => ({
+        ...prev,
+        password: "",
+        confirmPassword: "",
+      }));
     } catch (err) {
       console.error("Error on save: ", err);
     }
@@ -75,11 +78,11 @@ const ProfileUser = () => {
 
   const onCancel = () => {
     setIsEditing(false);
-    setFormData(({
+    setFormData({
       ...originalData,
       password: "",
       confirmPassword: "",
-    }));
+    });
   };
 
   const onModify = () => {
@@ -247,26 +250,19 @@ const ProfileUser = () => {
         <div className="progress-user__title">
           <h2>Cursos completados</h2>
         </div>
+
         <div className="circleProgress__container">
           <div className="circle-progressbar__container">
-            <h3 className="progress__title">Caral</h3>
-            <CircularProgressbar value={percentage} text={`${percentage}%`} />
-            <h3 className="note__title">Nota: X</h3>
-          </div>
-          <div className="circle-progressbar__container">
-            <h3 className="progress__title">Wari</h3>
-            <CircularProgressbar value={percentage} text={`${percentage}%`} />
-            <h3 className="note__title">Nota: X</h3>
-          </div>
-          <div className="circle-progressbar__container">
-            <h3 className="progress__title">Tiawanaku</h3>
-            <CircularProgressbar value={percentage} text={`${percentage}%`} />
-            <h3 className="note__title">Nota: X</h3>
-          </div>
-          <div className="circle-progressbar__container">
-            <h3 className="progress__title">Inca</h3>
-            <CircularProgressbar value={percentage} text={`${percentage}%`} />
-            <h3 className="note__title">Nota: X</h3>
+            {user.sections.map((section) => {
+              const progress = calcSectionProgress(section);
+              return (
+                <UserProgressCircle
+                  key={section.sectionId}
+                  title={section.sectionTitle}
+                  progress={progress}
+                />
+              );
+            })}
           </div>
         </div>
       </div>

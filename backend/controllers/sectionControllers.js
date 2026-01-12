@@ -117,7 +117,7 @@ const deleteSection = asyncHandler(async (req, res) => {
 // @access Private
 const updateSectionProgress = asyncHandler(async (req, res) => {
   // the JWT middleware sets `req.user` to the user's email
-  const userEmail = req.user;
+  const userEmail = req.user.email;
   const { sectionId } = req.params;
   const { isTheory, isVideo } = req.body;
   if (!sectionId || !userEmail) {
