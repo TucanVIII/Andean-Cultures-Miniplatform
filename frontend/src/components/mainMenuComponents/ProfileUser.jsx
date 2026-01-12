@@ -6,7 +6,7 @@ import {
 import useAuth from "../../hooks/useAuth.js";
 import calcSectionProgress from "../../utils/calcSectionProgress.js";
 
-import UserProgressCircle from "../userComponents/UserProgressCircle.jsx";
+import UserProgressCircle from "../../features/users/UserProgressCircle.jsx";
 import Loader from "../../features/ui/Loader.jsx";
 import { FaRegSave, FaEye, FaEyeSlash, FaTimes } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";

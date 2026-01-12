@@ -19,10 +19,11 @@ const useAuth = () => {
   const roles = role ? (Array.isArray(role) ? role : [role]) : [];
   const isAdmin = roles.includes("Admin");
 
-  console.log("User Id", userId);
-  console.log("auth token:", token);
-  console.log("decoded:", decoded);
-  console.log("roles:", roles, "isAdmin:", isAdmin);
+  /* Testing user jwt */
+  //console.log("User Id", userId);
+  //console.log("auth token:", token);
+  //console.log("decoded:", decoded);
+  //console.log("roles:", roles, "isAdmin:", isAdmin);
 
   return { userId, roles, isAdmin };
 };

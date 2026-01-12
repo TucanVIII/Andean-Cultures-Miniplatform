@@ -1,6 +1,7 @@
 import { useGetAllSectionsQuery } from "../../features/sections/sectionsApiSlice.js";
 import { useScrollCompletion } from "../../hooks/useScrollCompletion.js";
 import { useSectionTextProgress } from "../../hooks/useSectionTextProgress.js";
+import useCurrentUser from "../../hooks/useCurrentUser.js";
 
 import VideoSection from "../../features/sections/VideoSection.jsx";
 import QuestionsTest from "../../features/questions/QuestionsTest.jsx";
@@ -15,10 +16,15 @@ const CulturaCaral = ({ sectionId }) => {
     useScrollCompletion({ threshold: 1 });
 
   const { data: sections } = useGetAllSectionsQuery();
+  const { data:user,isLoading } = useCurrentUser();
   const section = sections?.entities?.[sectionId];
 
+  const userSection = user?.sections?.find(
+    (s) => s.sectionId === sectionId || s.sectionId?._id === sectionId
+  );
+
   if (!section) return null;
-  
+
   useSectionTextProgress({
     section,
     sectionId,
@@ -282,7 +288,11 @@ const CulturaCaral = ({ sectionId }) => {
       )}
 
       <div className="questions-container">
-        <QuestionsTest sectionId={sectionId} />
+        {userSection?.quiz?.status === "completed" ? (
+          <div className="quiz-completed">✅ Test completado</div>
+        ) : (
+          <QuestionsTest sectionId={sectionId} />
+        )}
       </div>
     </section>
   );
