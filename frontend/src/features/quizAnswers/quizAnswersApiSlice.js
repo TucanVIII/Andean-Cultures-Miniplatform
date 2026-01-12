@@ -3,14 +3,14 @@ import { apiSlice } from "../../app/api/apiSlice";
 export const quizApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         submitQuizAnswers: builder.mutation({
-            query: ({ userId,sectionId,answers }) => ({
+            query: ({ sectionId,answers }) => ({
                 url: `/users/quiz/${sectionId}`,
                 method: "POST",
-                body: { userId,answers }
+                body: { answers }
             }),
             invalidatesTags: (result,error,sectionId) => [
                 {type:"Section", id: sectionId},
-                {type:"User", id:"CURRENT_USER"}
+                {type:"User", id:"PROFILE"}
             ]
         })
     })

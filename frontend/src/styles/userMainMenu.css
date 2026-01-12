@@ -37,7 +37,8 @@
 /* Start button */ 
 .start-button,
 .faq-button,
-.support-button {
+.support-button,
+.score-button {
  appearance: none;
  background-color: transparent;
  border: 2px solid var(--color-text-I);
@@ -64,13 +65,15 @@
 
 .start-button:disabled, 
 .faq-button:disabled,
-.support-button:disabled {
+.support-button:disabled,
+.score-button:disabled {
  pointer-events: none;
 }
 
 .start-button:hover, 
 .faq-button:hover,
-.support-button:hover {
+.support-button:hover,
+.score-button:hover {
  color: var(--color-text-VII);
  background-color: var(--color-text-II);
  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
@@ -79,7 +82,8 @@
 
 .start-button:active,
 .faq-button:active,
-.support-button:active {
+.support-button:active,
+.score-button:active {
  box-shadow: none;
  transform: translateY(0);
 }

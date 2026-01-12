@@ -1,31 +1,47 @@
 import { useState } from "react";
+import { useSubmitQuizAnswersMutation } from "../quizAnswers/quizAnswersApiSlice.js";
 import { useGetQuizQuestionQuery } from "./questionsApiSlice.js";
+
+import { notify } from "../ui/notify.js";
 import Loader from "../ui/Loader.jsx";
 
 import "../../styles/questionsStyle.css";
 
 const QuestionsTest = ({ sectionId }) => {
-  const { data: questions = [], isLoading, isError } = useGetQuizQuestionQuery(sectionId, { skip: !sectionId });
+  const {
+    data: questions = [],
+    isLoading,
+    isError,
+  } = useGetQuizQuestionQuery(sectionId, { skip: !sectionId });
 
   const [selectedAnswers, setSelectedAnswers] = useState({});
-  const [feedback, setFeedback] = useState({});
+  const [submitQuizAnswers, { isLoading: isSubmitting }] =
+    useSubmitQuizAnswersMutation();
 
   const handleSelect = (questionId, option) => {
     setSelectedAnswers((s) => ({ ...s, [questionId]: option }));
   };
 
-  const getCorrectAnswer = (q) => q.correctAnswer ?? q.answer ?? q.correct ?? q.rightAnswer ?? q.correctOption ?? null;
+  const handleSubmit = async () => {
+    const answersSubmitted = Object.entries(selectedAnswers).map(
+      ([questionId, userAnswer]) => ({ questionId, userAnswer })
+    );
 
-  const handleCheck = (question) => {
-    const qid = question._id;
-    const selected = selectedAnswers[qid];
-    const correct = getCorrectAnswer(question);
-    if (correct === null) {
-      setFeedback((f) => ({ ...f, [qid]: "Respuesta no definida desde el servidor" }));
+    if (answersSubmitted.length !== questions.length) {
+      notify.info("Se debe responder todas las preguntas!");
       return;
     }
-    const ok = String(selected) === String(correct);
-    setFeedback((f) => ({ ...f, [qid]: ok ? "Correcto" : "Incorrecto" }));
+
+    try {
+      await submitQuizAnswers({
+        sectionId,
+        answers: answersSubmitted,
+      }).unwrap();
+      notify.success("Respuestas enviadas");
+    } catch (err) {
+      console.error(err);
+      notify.error("Error al guardar las respuestas");
+    }
   };
 
   if (!sectionId) return null;
@@ -47,7 +63,7 @@ const QuestionsTest = ({ sectionId }) => {
 
             <div className="options-questions">
               {(question.options || []).map((option, index) => (
-                <label className="option-question" key={index}>
+                <label className="option-question">
                   <input
                     type="radio"
                     name={`q-${question._id}`}
@@ -55,20 +71,23 @@ const QuestionsTest = ({ sectionId }) => {
                     checked={selectedAnswers[question._id] === option}
                     onChange={() => handleSelect(question._id, option)}
                   />
+                  <span className="radio"></span>
                   {option}
                 </label>
               ))}
             </div>
-
-            <div className="question-actions">
-              <button className="choose-button" onClick={() => handleCheck(question)}>
-                Verificar
-              </button>
-            </div>
-              {feedback[question._id] && <span className="feedback">{feedback[question._id]}</span>}
           </div>
         ))
       )}
+      <div>
+        <button
+          className="score-button"
+          onClick={handleSubmit}
+          disabled={isSubmitting}
+        >
+          Calificar
+        </button>
+      </div>
     </section>
   );
 };

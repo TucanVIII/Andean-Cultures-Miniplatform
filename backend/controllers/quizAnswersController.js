@@ -7,9 +7,9 @@ import asyncHandler from "express-async-handler"
 // @access Private
 const submitQuizAnswers = asyncHandler( async(req,res) => {
     
-    console.log('Received Body:', req.body);
     const sectionId = req.params.sectionId;
-    const { userId,answers } = req.body;
+    const userId = req.user.id;
+    const { answers } = req.body;
     if(!userId || !sectionId || !answers || !answers.length) {
         return res.status(400).json({ message:"All fields are required" })
     }
@@ -26,7 +26,7 @@ const submitQuizAnswers = asyncHandler( async(req,res) => {
 
     // Iterating and qualifying
     let score = 0;
-    let answersWithScore = [];
+    const answersWithScore = [];
 
     correctAnswers.forEach(answer => {
         const submittedAns = answers.find(i => i.questionId.toString() === answer._id.toString())
@@ -77,5 +77,3 @@ const submitQuizAnswers = asyncHandler( async(req,res) => {
 export {
     submitQuizAnswers
 }
-
-//const userId = req.userId;
