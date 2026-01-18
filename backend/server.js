@@ -14,6 +14,7 @@ import sectionRoutes from "./routes/sectionRoutes.js";
 import quizAnswersRoutes from "./routes/quizAnswersRoutes.js";
 import questionsRoutes from "./routes/questionsRoutes.js";
 import progressRoutes from "./routes/progressRoute.js";
+import certificateRoutes from "./routes/certificatesRoute.js";
 
 // Middlewares to handle logs and log errors
 import { logger, logEvents } from "./middleware/loggers.js";
@@ -52,6 +53,7 @@ app.use("/api/v2/users/progress", progressRoutes);
 app.use("/api/v2/users/quiz", quizAnswersRoutes);
 app.use("/api/v2/questions",questionsRoutes);
 app.use("/api/v2/sections",sectionRoutes);
+app.use("/api/v2/certificate", certificateRoutes);
 app.use(/.*/, (req, res) => {
   res.status(404);
   if (req.accepts("html")) {

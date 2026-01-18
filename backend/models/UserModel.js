@@ -35,7 +35,11 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     sections: [SectionProgressSchema],
-    certificate: CertificateSchema,
+    certificate: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref:"Certificate",
+      default: null
+    },
   },{
     timestamps: true,
   }

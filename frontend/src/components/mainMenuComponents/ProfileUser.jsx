@@ -5,13 +5,15 @@ import {
 } from "../../features/users/usersApiSlice.js";
 import useAuth from "../../hooks/useAuth.js";
 import calcSectionProgress from "../../utils/calcSectionProgress.js";
+import { useGenerateCertificateMutation } from "../../features/certificate/certificateApiSlice.js";
+import Certificate from "../../features/certificate/Certificate.jsx";
 
 import UserProgressCircle from "../../features/users/UserProgressCircle.jsx";
 import Loader from "../../features/ui/Loader.jsx";
+import { notify } from "../../features/ui/notify.js";
+
 import { FaRegSave, FaEye, FaEyeSlash, FaTimes } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
-
-import QR_code_temp from "../../assets/QR_code_temp.svg";
 
 import "../../styles/ProfileUser.css";
 
@@ -25,10 +27,18 @@ const ProfileUser = () => {
     error,
   } = useGetUserByIdQuery();
   const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
+  const [generateCertificate, { isLoading: isGenerating }] =
+    useGenerateCertificateMutation();
 
   const [isEditing, setIsEditing] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [originalData, setOriginalData] = useState(null);
+  const [showCertificate, setShowCertificate] = useState(false);
+
+  const courseCompleted = user?.sections?.every(
+    (s) =>
+      s.theoryCompleted && s.videoCompleted && s.quiz.status === "completed"
+  );
 
   const [formData, setFormData] = useState({
     email: "",
@@ -53,8 +63,6 @@ const ProfileUser = () => {
       setOriginalData(data);
     }
   }, [user]);
-
-  const percentage = 50;
 
   const onSave = async () => {
     try {
@@ -92,6 +100,23 @@ const ProfileUser = () => {
 
   const onVisible = () => {
     setIsVisible((prev) => !prev);
+  };
+
+  const onClose = () => {
+    setShowCertificate(false)
+  };
+
+  const handleGenerateCertificate = async () => {
+    try {
+      if (!user.certificate) {
+        await generateCertificate().unwrap();
+        notify.success("Certificado generado!");
+      }
+      setShowCertificate(true);
+    } catch (err) {
+      console.error(err);
+      notify.error("Fallo al generar el certificado");
+    }
   };
 
   if (isLoading) return <Loader />;
@@ -269,7 +294,11 @@ const ProfileUser = () => {
 
       <div className="certificate-user__container">
         <h3 className="certificate__title">Certificado:</h3>
-        <img src={QR_code_temp} alt="" />
+        {courseCompleted && (
+          <button onClick={handleGenerateCertificate}>Ver certificado</button>
+        )}
+
+        <Certificate open={showCertificate} onClose={onClose} />
       </div>
     </section>
   );
