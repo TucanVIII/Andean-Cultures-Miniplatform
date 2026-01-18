@@ -31,10 +31,11 @@ const Certificate = ({ open, onClose }) => {
       <div className="certificate-title">
         <h2>Certificado:</h2>
         <button className="style__button" onClick={onClose}>
-          <FaTimes />
+          <FaTimes className="faIcon__style close__button"/>
         </button>
       </div>
       <iframe
+        className="certificate__iframe"
         src={pdfUrl}
         title="Certificado"
         frameborder="0"

@@ -125,9 +125,7 @@ const ProfileUser = () => {
     <section className="profile-user__container">
       <div className="edit-user__container">
         <div className="inputs__container">
-          <div>
             <h2 className="edit-user__title">Editar perfil</h2>
-          </div>
 
           <label className="emailUser input__style">
             Email:
@@ -293,9 +291,9 @@ const ProfileUser = () => {
       </div>
 
       <div className="certificate-user__container">
-        <h3 className="certificate__title">Certificado:</h3>
+        <h2 className="certificate__title">Certificado:</h2>
         {courseCompleted && (
-          <button onClick={handleGenerateCertificate}>Ver certificado</button>
+          <button className="score-button" onClick={handleGenerateCertificate}>Ver certificado</button>
         )}
 
         <Certificate open={showCertificate} onClose={onClose} />

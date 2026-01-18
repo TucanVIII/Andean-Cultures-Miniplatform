@@ -274,3 +274,19 @@ input:focus ~ .input-border {
 .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-trail {
   stroke: transparent;
 }
+
+/* certificate-user__container */
+.certificate-user__container{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+  gap: 20px;
+  width: 90%;
+  align-items: center;
+}
+
+.certificate-user__container button{
+  width: 25%;
+  gap: 20px;
+}
