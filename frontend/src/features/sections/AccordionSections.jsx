@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, cloneElement } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 import Loader from "../../features/ui/Loader.jsx"
 
@@ -35,7 +35,7 @@ const AccordionSections = ({ selectedCulture, onSelectedCulture, onScrollSection
   const handleTitleClick = (index, section) => {
     setIsActive(isActive === index ? null : index);
     const comp = sectionsObject[section.sectionTitle.toUpperCase()];
-    const staticContent = comp ? React.cloneElement(comp, { sectionId: section._id }) : null;
+    const staticContent = comp ? cloneElement(comp, { sectionId: section._id }) : null;
     if (onSelectedCulture) {
       onSelectedCulture({
         ...section,

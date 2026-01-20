@@ -2,7 +2,8 @@ import { Routes, Route } from "react-router-dom";
 
 import Layout from "./components/Layout.jsx";
 import Public from "./components/Public.jsx";
-import Login from "./features/auth/Login.jsx";
+import AuthPage from "./features/auth/AuthPage.jsx";
+import VerifyEmail from "./features/auth/VerifyEmail.jsx";
 import UserMainMenu from "./components/UserMainMenu.jsx";
 import MainMenuContent from "./components/mainMenuComponents/MainMenuContent.jsx";
 import SectionsLayout from "./components/mainMenuComponents/SectionsLayout.jsx";
@@ -16,7 +17,9 @@ function App() {
       <Route path="/" element={<Layout />}>
         {/* Public routes */}
         <Route index element={<Public />} />
-        <Route path="login" element={<Login />} />
+        <Route path="login" element={<AuthPage />} />
+        <Route path="verify-email" element={<VerifyEmail />} />
+        
         {/* Protected routes */}
         <Route element={<Prefetch />}>
           <Route path="menu" element={<UserMainMenu />}>

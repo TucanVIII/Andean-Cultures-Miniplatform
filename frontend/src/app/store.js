@@ -8,7 +8,6 @@ export const store = configureStore({
     reducer:{
         [apiSlice.reducerPath]:apiSlice.reducer,
         auth: authReducer, 
-        // sections: sectionsReducer,
         ui: uiReducer
     },
     middleware: (getDefaultMiddleware) => 

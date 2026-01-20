@@ -1,21 +1,21 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setCredentials } from "./authSlice.js";
-import { useLoginMutation } from "./authApiSlice.js";
+
+import { useSignupMutation } from "./authApiSlice.js";
 import { notify } from "../ui/notify.js";
 
 import Loader from "../ui/Loader.jsx";
 
-const Login = () => {
+const Signup = () => {
   const userRef = useRef();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  const [login, { isLoading }] = useLoginMutation();
+  const [signup, { isLoading }] = useSignupMutation();
 
   const handleHomeClick = () => {
     navigate("/");
@@ -24,24 +24,31 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { accessToken } = await login({ email, password }).unwrap();
-      dispatch(setCredentials({ accessToken }));
+      await signup({
+        email,
+        firstName,
+        lastName,
+        password,
+      }).unwrap();
+      setFirstName("");
+      setLastName("");
       setEmail("");
       setPassword("");
-      navigate("/menu");
+
+      notify.success("Revisa tu email para verificar tu cuenta");
+      navigate("/login");
+
     } catch (err) {
       if (!err.status) {
         notify.warning("Fallo en el servidor!");
-      } else if (err.status === 400) {
-        notify.warning("Datos incompletos: Falta email o contraseña");
-      } else if (err.status === 401) {
-        notify.error("Sin autorización!");
       } else {
-        notify.error(err.data?.message);
+        notify.error("Error al registrarse");
       }
     }
   };
 
+  const handleNameInput = (e) => setFirstName(e.target.value);
+  const handleLastNameInput = (e) => setLastName(e.target.value);
   const handleEmailInput = (e) => setEmail(e.target.value);
   const handlePasswordInput = (e) => setPassword(e.target.value);
 
@@ -53,13 +60,86 @@ const Login = () => {
 
   const content = (
     <div>
-      <h1 className="title">LOGIN</h1>
+      <h1 className="title">SIGN UP</h1>
       <form action="" className="form-container" onSubmit={handleSubmit}>
+        <div className="user-name">
+          <div className="wave-group name">
+            <input
+              type="text"
+              className="input"
+              ref={userRef}
+              value={firstName}
+              onChange={handleNameInput}
+              required={true}
+            />
+            <span className="bar"></span>
+            <label className="label">
+              <span className="label-char" style={{ "--index": 0 }}>
+                N
+              </span>
+              <span className="label-char" style={{ "--index": 1 }}>
+                O
+              </span>
+              <span className="label-char" style={{ "--index": 2 }}>
+                M
+              </span>
+              <span className="label-char" style={{ "--index": 3 }}>
+                B
+              </span>
+              <span className="label-char" style={{ "--index": 4 }}>
+                R
+              </span>
+              <span className="label-char" style={{ "--index": 5 }}>
+                E
+              </span>
+            </label>
+          </div>
+
+          <div className="wave-group lastName">
+            <input
+              type="text"
+              className="input"
+              value={lastName}
+              onChange={handleLastNameInput}
+              required={true}
+            />
+            <span className="bar"></span>
+            <label className="label">
+              <span className="label-char" style={{ "--index": 0 }}>
+                A
+              </span>
+              <span className="label-char" style={{ "--index": 1 }}>
+                P
+              </span>
+              <span className="label-char" style={{ "--index": 2 }}>
+                E
+              </span>
+              <span className="label-char" style={{ "--index": 3 }}>
+                L
+              </span>
+              <span className="label-char" style={{ "--index": 4 }}>
+                L
+              </span>
+              <span className="label-char" style={{ "--index": 5 }}>
+                I
+              </span>
+              <span className="label-char" style={{ "--index": 6 }}>
+                D
+              </span>
+              <span className="label-char" style={{ "--index": 6 }}>
+                O
+              </span>
+              <span className="label-char" style={{ "--index": 6 }}>
+                S
+              </span>
+            </label>
+          </div>
+        </div>
+
         <div className="wave-group">
           <input
             type="text"
             className="input"
-            ref={userRef}
             value={email}
             onChange={handleEmailInput}
             required={true}
@@ -174,4 +254,4 @@ const Login = () => {
   return content;
 };
 
-export default Login;
+export default Signup;

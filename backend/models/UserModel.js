@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 import SectionProgressSchema from "./SectionProgressModel.js";
-import CertificateSchema from "./CertificateModel.js";
 
 const userSchema = new mongoose.Schema(
   {
@@ -24,11 +23,23 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    emailVerified: {
+      type: Boolean,
+      default: false,
+    },
+    emailVerificationToken: {
+      type: String,
+      default: null,
+    },
+    emailVerificationExpires: {
+      type: Date,
+      default: null,
+    },
     role: {
       type: [String],
-      enum: ["Student","Admin"],
+      enum: ["Student", "Admin"],
       default: "Student",
-      required:true
+      required: true,
     },
     password: {
       type: String,
@@ -37,12 +48,13 @@ const userSchema = new mongoose.Schema(
     sections: [SectionProgressSchema],
     certificate: {
       type: mongoose.Schema.Types.ObjectId,
-      ref:"Certificate",
-      default: null
+      ref: "Certificate",
+      default: null,
     },
-  },{
+  },
+  {
     timestamps: true,
-  }
+  },
 );
 
 export default mongoose.model("User", userSchema);

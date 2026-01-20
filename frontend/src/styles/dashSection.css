@@ -34,10 +34,7 @@
 }
 
 .sub-title {
-  color: var(--color-text-I);
-  .dark &{
-      color: var(--color-text-VI);
-    }
+  color: var(--color-text-II) !important;
 }
 
 .sub-subtitle {

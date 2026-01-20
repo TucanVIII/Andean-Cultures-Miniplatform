@@ -1,6 +1,10 @@
 // Server libraries
+import "dotenv/config";
+//import dotenv from "dotenv/config";
+// Dotenv
+//dotenv.config();
+
 import express from "express";
-import dotenv from "dotenv";
 import mongoose from "mongoose";
 import path from "path";
 import cookieParser from "cookie-parser";
@@ -28,9 +32,6 @@ import connectionDB from "./config/db.js";
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-// Dotenv
-dotenv.config();
 
 // DB connection
 connectionDB();

@@ -73,6 +73,7 @@ const ProfileUser = () => {
         lastName: formData.lastName,
         password: formData.password || undefined,
       }).unwrap();
+      notify.success("Perfil actualizado!")
       setIsEditing(false);
       setFormData((prev) => ({
         ...prev,
@@ -80,6 +81,7 @@ const ProfileUser = () => {
         confirmPassword: "",
       }));
     } catch (err) {
+      notify.error("Error al actualizar")
       console.error("Error on save: ", err);
     }
   };

@@ -1,3 +1,6 @@
+import { v4 as uuid } from "uuid";
+import { sendVerificationEmail } from "../services/emailService.js";
+
 import User from "../models/UserModel.js";
 import Section from "../models/SectionModel.js";
 import bcrypt from "bcrypt";
@@ -7,22 +10,26 @@ import asyncHandler from "express-async-handler";
 // @desc Signup
 // @route POST /auth/signup
 // @access Public
-const signup = asyncHandler(async(req,res) => {
-  const { email,firstName,lastName,password } = req.body;
-  if(!email || !firstName || !lastName || !password) {
-    return res.status(400).json({ message:"All fields are required" });
+const signup = asyncHandler(async (req, res) => {
+  const { email, firstName, lastName, password } = req.body;
+  if (!email || !firstName || !lastName || !password) {
+    return res.status(400).json({ message: "All fields are required" });
   }
 
   const duplicate = await User.findOne({ email }).lean();
-  if(duplicate) {
-    return res.status(409).json({ message:"Duplicate email user already registered" })
+  if (duplicate) {
+    return res
+      .status(409)
+      .json({ message: "Duplicate email user already registered" });
   }
 
+  const verificationToken = uuid();
+
   const hashedPassword = await bcrypt.hash(password, 10);
-  
+
   const sections = await Section.find().lean();
 
-  const sectionsProgress = sections.map(section => ({
+  const sectionsProgress = sections.map((section) => ({
     sectionId: section._id,
     sectionTitle: section.sectionTitle,
     order: section.order,
@@ -34,21 +41,65 @@ const signup = asyncHandler(async(req,res) => {
       grade: 0,
       totalQuestions: 4,
       completionDate: null,
-      userAnswers: []
-  }
-  }))
+      userAnswers: [],
+    },
+  }));
 
   const user = await User.create({
     firstName,
     lastName,
     email,
+    emailVerified: false,
+    emailVerificationToken: verificationToken,
+    emailVerificationExpires: new Date(Date.now() + 1000 * 60 * 60),
     password: hashedPassword,
-    roles: ["Student"],
+    role: ["Student"],
     sections: sectionsProgress,
   });
 
-  res.status(201).json({ message: `User registered successfully: ${user.email}` });
-})
+  try{
+    await sendVerificationEmail({
+      email: user.email,
+      token: verificationToken,
+      firstName: user.firstName,
+    });
+  } catch(err) {
+    console.error("Mensaje no enviado",err);
+  }
+
+  res
+    .status(201)
+    .json({
+      message: `User registered: ${user.email}. Please verify your email`,
+    });
+});
+
+// @desc Verify email
+// @route GET /auth/verify-email
+// @access Public
+const verifyEmail = asyncHandler(async (req, res) => {
+  const { token } = req.query;
+  if (!token) {
+    return res.status(400).json({ message: "Token is required" });
+  }
+
+  const user = await User.findOne({
+    emailVerificationToken: token,
+    emailVerificationExpires: { $gt: Date.now() },
+  });
+
+  if (!user) {
+    return res.status(400).json({ message: "Invalid or expired token" });
+  }
+
+  user.emailVerified = true;
+  user.emailVerificationToken = null;
+  user.emailVerificationExpires = null;
+
+  await user.save();
+
+  res.status(200).json({ message: "Email verified successfully" });
+});
 
 // @desc Login
 // @route POST /auth
@@ -66,6 +117,12 @@ const login = asyncHandler(async (req, res) => {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
+  if (!foundUser.emailVerified) {
+    return res.status(403).json({
+      message: "Please verify your email before logging in",
+    });
+  }
+
   const match = await bcrypt.compare(password, foundUser.password);
   if (!match) {
     return res.status(401).json({ message: "Unauthorized" });
@@ -73,20 +130,27 @@ const login = asyncHandler(async (req, res) => {
 
   const accessToken = jwt.sign(
     {
-      "UserInfo": {
-        "id": foundUser._id.toString(),
-        "email": foundUser.email,
-        "role": foundUser.role,
-        "firstName": foundUser.firstName,
+      UserInfo: {
+        id: foundUser._id.toString(),
+        email: foundUser.email,
+        role: foundUser.role,
+        firstName: foundUser.firstName,
       },
     },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "15m" }
+    { expiresIn: "15m" },
   );
   const refreshToken = jwt.sign(
-    { UserInfo: { id: foundUser._id.toString(),email: foundUser.email, role: foundUser.role, firstName: foundUser.firstName } },
+    {
+      UserInfo: {
+        id: foundUser._id.toString(),
+        email: foundUser.email,
+        role: foundUser.role,
+        firstName: foundUser.firstName,
+      },
+    },
     process.env.REFRESH_TOKEN,
-    { expiresIn: "1d" }
+    { expiresIn: "1d" },
   );
   // Create secure cookie with refresh token
   res.cookie("jwt", refreshToken, {
@@ -122,9 +186,15 @@ const refresh = asyncHandler(async (req, res) => {
   if (!foundUser) return res.status(401).json({ message: "Unauthorized" });
 
   const accessToken = jwt.sign(
-    { UserInfo: { id: foundUser._id.toString(),email: foundUser.email, role: foundUser.role } },
+    {
+      UserInfo: {
+        id: foundUser._id.toString(),
+        email: foundUser.email,
+        role: foundUser.role,
+      },
+    },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "15m" }
+    { expiresIn: "15m" },
   );
   res.json({ accessToken });
 });
@@ -134,9 +204,10 @@ const refresh = asyncHandler(async (req, res) => {
 // @access Public
 const logout = (req, res) => {
   const cookies = req.cookies;
-  if (!cookies?.jwt) return res.sendStatus(204).json({ message:"Not cookie found"}) // No content
+  if (!cookies?.jwt)
+    return res.sendStatus(204).json({ message: "Not cookie found" }); // No content
   res.clearCookie("jwt", { httpOnly: true, sameSite: "None", secure: true });
   res.json({ message: "Cookie cleared - Logged out successfully" });
 };
 
-export { signup,login, refresh, logout };
+export { signup, verifyEmail, login, refresh, logout };

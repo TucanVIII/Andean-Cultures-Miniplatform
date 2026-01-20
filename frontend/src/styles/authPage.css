@@ -1,3 +1,4 @@
+/* Page style */
 .login-container{
     width: 100%;
     height: 100vh;
@@ -17,13 +18,106 @@
 }
 
 .login-menu .title{
+  color: var(--color-text-II) !important;
+}
+
+.login-menu .header{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 60px;
+}
+
+.header .btn{
+  width: 50%;
+  background: rgba(160, 160, 160, 0.1);
+  border: none;
+  color: var(--color-text-III);
+}
+
+.btn.active{
+  background: rgba(230, 230, 230, 0.7);
+  font-weight: 700;
+}
+
+.btn:hover{
+  cursor: pointer;
+  background: rgba(200, 200, 200, 0.4);
+}
+
+.tab-effect {
+  position: relative;
+  background: none;
+  border: none;
   color: var(--color-text-II);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* upper line */
+.tab-effect::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--color-text-I);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.25s ease-out;
+}
+
+/* hover */
+.tab-effect:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* activo */
+.tab-effect.active::after {
+  transform: scaleX(1);
+}
+
+
+/* Inner components */
+.user-name{
+  width: 80%;
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  margin: auto 0;
+}
+
+.user-name .name{
+  width: 35%;  
+}
+
+.user-name .lastName{
+  width: 65%;
+}
+
+.body {
+  width: 100%;
+  height: calc(100% - 60px);
+  padding: 20px;
+  transition: background-color 0.3s ease;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+/* tab-active */
+.tab-login-active,
+.tab-signup-active {
+  background: rgba(230, 230, 230, 0.7);
 }
 
 /* Inputs form */
 /* From Uiverse.io by AbanoubMagdy1 */ 
 .wave-group {
   position: relative;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .form-container{
@@ -32,13 +126,14 @@
     justify-content: center;
     flex-direction: column;
     gap: 30px;
+    width: 100%;
 }
 
 .wave-group .input {
   font-size: 1rem;
   padding: 10px 10px 10px 5px;
   display: block;
-  width: 200px;
+  width: 100%;
   border: none;
   border-bottom: 1px solid var(--color-text-I);
   background: transparent;
@@ -75,7 +170,7 @@
 .wave-group .bar {
   position: relative;
   display: block;
-  width: 200px;
+  width: 100%;
 }
 
 .wave-group .bar:before,.wave-group .bar:after {
@@ -175,4 +270,40 @@
 
 .login.backHome:hover .hover-underline-animation:after {
   transform-origin: bottom right;
+}
+
+/* VerifyEmail style */
+.verify__container{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-footer);
+}
+
+.verify__inner{
+  width: 50%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.verify__inner img{
+  width: 240px;
+  height: 240px;
+  margin: 2px;
+}
+
+.verify__inner h2,
+.verify__inner p,
+.verify__inner button {
+  margin: 0;
+}
+
+.verify__inner button {
+  padding: 10px 20px;
 }
